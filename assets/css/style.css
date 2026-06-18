@@ -1,0 +1,804 @@
+/* =========================================================================
+   GEFF GROUP — foglio di stile condiviso
+   Direzione: "La Bussola semplificata" — palette scura, segno bussola,
+   le 3 rotte Mare / Sartoria / Strada come cuore visivo.
+   Font: Bricolage Grotesque (display) + Schibsted Grotesk (testo).
+   ========================================================================= */
+
+/* ---- TOKENS (palette da "La Bussola") ---------------------------------- */
+:root{
+  --carbone:#14181d;
+  --carbone-2:#0f1318;
+  --inchiostro:#0b0e12;
+  --testo:#e8e6df;
+  --testo-soft:rgba(232,230,223,.62);
+  --testo-faint:rgba(232,230,223,.40);
+  --linea:rgba(232,230,223,.14);
+  --linea-soft:rgba(232,230,223,.07);
+
+  /* colori-zona dei 3 servizi */
+  --mare:#1f7a6e;       --mare-soft:#2e9c8d;
+  --sartoria:#c08a3c;   --sartoria-soft:#d6a558;
+  --strada:#6b7785;     --strada-soft:#8c98a6;
+
+  --bordo-r:2px;
+  --ease:cubic-bezier(.7,0,.18,1);
+  --dur:.6s;
+
+  --maxw:1180px;
+  --gutter:clamp(18px,5vw,52px);
+  --header-h:64px;
+}
+
+/* ---- RESET ------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{
+  overflow-x:clip;
+  scroll-behavior:smooth;
+  scroll-padding-top:calc(var(--header-h) + 12px);
+}
+body{
+  background:var(--inchiostro);
+  color:var(--testo);
+  font-family:"Schibsted Grotesk",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:clip;
+  max-width:100vw;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--sartoria);color:var(--inchiostro)}
+
+/* grana sottile fissa: dà profondità senza colore piatto */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  pointer-events:none;z-index:1;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* contenuto sopra la grana (l'header NON va qui: usa il suo z-index:100 sticky,
+   altrimenti questa regola più specifica lo declasserebbe a relative/z-index:2) */
+.shell,main,footer.site-footer{position:relative;z-index:2}
+
+/* ---- ACCESSIBILITÀ: skip link + focus --------------------------------- */
+.skip-link{
+  position:absolute;left:12px;top:-60px;z-index:1000;
+  background:var(--sartoria);color:var(--inchiostro);
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  padding:10px 16px;border-radius:var(--bordo-r);
+  transition:top .2s ease;
+}
+.skip-link:focus{top:12px}
+
+a:focus-visible,button:focus-visible,
+input:focus-visible,textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--sartoria);
+  outline-offset:3px;
+}
+
+/* ---- UTILITY LAYOUT ---------------------------------------------------- */
+.container{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.eyebrow{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--testo-faint);
+  display:inline-flex;align-items:center;gap:12px;
+}
+.eyebrow::before{
+  content:"";width:26px;height:1px;background:var(--sartoria);display:inline-block;
+}
+
+/* ---- HEADER ------------------------------------------------------------ */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,19,24,.86);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--linea);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:var(--header-h);
+  padding-block:10px;
+}
+.brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+.brand .mark{width:30px;height:30px;flex:0 0 auto;color:var(--testo)}
+.brand .mark .needle{transition:transform 1.1s var(--ease)}
+.brand:hover .mark .needle{transform:rotate(135deg)}
+.brand .name{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:clamp(15px,2vw,18px);
+  letter-spacing:.02em;line-height:1;
+}
+.brand .name span{color:var(--testo-soft);font-weight:600}
+
+.nav{display:flex;align-items:center;gap:4px}
+.nav-link{
+  font-size:14px;color:var(--testo-soft);
+  padding:9px 13px;border-radius:var(--bordo-r);
+  position:relative;transition:color .2s;white-space:nowrap;
+}
+.nav-link::after{
+  content:"";position:absolute;left:13px;right:13px;bottom:4px;height:1px;
+  background:var(--sartoria);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.nav-link:hover,.nav-link[aria-current="page"]{color:var(--testo)}
+.nav-link:hover::after,.nav-link[aria-current="page"]::after{transform:scaleX(1)}
+
+.header-actions{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+
+/* CTA principale "Scrivici una mail" */
+.btn-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;padding:10px 18px;
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:.01em;
+  color:var(--inchiostro);background:var(--sartoria);
+  border:1px solid var(--sartoria);border-radius:var(--bordo-r);
+  cursor:pointer;transition:transform .25s var(--ease),filter .25s;
+}
+.btn-cta svg{width:15px;height:15px;flex:0 0 auto}
+.btn-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+
+/* CTA secondaria (bordo) */
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;padding:10px 18px;
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:700;font-size:14px;
+  color:var(--testo-soft);background:transparent;
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  cursor:pointer;transition:border-color .25s,color .25s,background .25s;
+}
+.btn-ghost svg{width:15px;height:15px;flex:0 0 auto}
+.btn-ghost:hover{border-color:var(--sartoria);color:var(--testo)}
+
+/* Hamburger (mobile) */
+.burger{
+  display:none;
+  width:44px;height:44px;flex:0 0 auto;
+  background:none;border:1px solid var(--linea);border-radius:var(--bordo-r);
+  cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.burger span{display:block;width:20px;height:1.5px;background:var(--testo);
+  transition:transform .25s ease,opacity .2s ease;transform-origin:center}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ---- HERO -------------------------------------------------------------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding-block:clamp(56px,11vh,120px) clamp(48px,9vh,96px);
+  border-bottom:1px solid var(--linea);
+}
+/* alone radiale tricromatico in basso: evoca le 3 rotte, non un colore piatto */
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(70% 60% at 18% 120%, rgba(31,122,110,.20), transparent 60%),
+    radial-gradient(70% 60% at 50% 130%, rgba(192,138,60,.16), transparent 60%),
+    radial-gradient(70% 60% at 84% 120%, rgba(107,119,133,.18), transparent 60%);
+}
+.hero .container{position:relative;z-index:1}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(28px,5vw,64px);align-items:center;
+}
+.hero-eyebrow{margin-bottom:22px}
+.hero-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;letter-spacing:-.015em;line-height:.98;
+  font-size:clamp(40px,7vw,82px);
+  color:var(--testo);margin-bottom:22px;
+}
+.hero-title em{font-style:normal;color:var(--sartoria-soft);display:block}
+.hero-lead{
+  font-size:clamp(16px,1.5vw,19px);
+  line-height:1.6;color:var(--testo-soft);
+  max-width:46ch;margin-bottom:30px;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* segno bussola grande, lato hero (SVG, niente foto) */
+.hero-compass{display:flex;align-items:center;justify-content:center}
+.hero-compass svg{
+  width:min(360px,80%);height:auto;color:var(--testo);
+  filter:drop-shadow(0 10px 40px rgba(0,0,0,.4));
+}
+.hero-compass .ring{stroke:var(--linea)}
+.hero-compass .ring-2{stroke:var(--linea-soft)}
+.hero-compass .tick{stroke:var(--testo-faint)}
+.hero-compass .needle-n{fill:var(--sartoria)}
+.hero-compass .needle-s{fill:var(--strada)}
+.hero-compass .label{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:7px;letter-spacing:.12em;fill:var(--testo-soft);
+}
+@media(prefers-reduced-motion:no-preference){
+  .hero-compass .rotor{
+    transform-box:fill-box;transform-origin:center;
+    animation:compass-drift 24s ease-in-out infinite;
+  }
+}
+@keyframes compass-drift{
+  0%,100%{transform:rotate(-6deg)}
+  50%{transform:rotate(6deg)}
+}
+
+/* ---- SECTION GENERICHE ------------------------------------------------- */
+.section{padding-block:clamp(56px,9vh,104px)}
+.section-head{max-width:62ch;margin-bottom:clamp(32px,5vh,52px)}
+.section-head .eyebrow{margin-bottom:16px}
+.section-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;letter-spacing:-.01em;line-height:1.04;
+  font-size:clamp(28px,4vw,46px);color:var(--testo);
+}
+.section-intro{
+  margin-top:16px;font-size:clamp(15px,1.4vw,17px);
+  color:var(--testo-soft);line-height:1.65;max-width:54ch;
+}
+
+/* ---- LE 3 ROTTE (cuore visivo, versione scrollabile) ------------------ */
+.routes{display:grid;gap:14px}
+.route{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:clamp(16px,3vw,32px);
+  padding:clamp(22px,3vw,32px) clamp(20px,3vw,34px);
+  background:var(--carbone);
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  color:inherit;
+  transition:transform .35s var(--ease),border-color .35s,background .35s;
+}
+/* alone di colore-zona, in basso a sinistra del blocco */
+.route::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(80% 140% at 0% 120%, var(--zona-glow), transparent 62%);
+  opacity:.55;transition:opacity .35s var(--ease);
+}
+/* barra di colore-zona a sinistra, come segnaletica */
+.route::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--zona);
+}
+.route[data-zona="mare"]{--zona:var(--mare);--zona-soft:var(--mare-soft);--zona-glow:rgba(31,122,110,.32)}
+.route[data-zona="sartoria"]{--zona:var(--sartoria);--zona-soft:var(--sartoria-soft);--zona-glow:rgba(192,138,60,.30)}
+.route[data-zona="strada"]{--zona:var(--strada);--zona-soft:var(--strada-soft);--zona-glow:rgba(107,119,133,.34)}
+
+.route:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--zona) 55%, var(--linea))}
+.route:hover::before{opacity:.9}
+
+.route-index{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:700;font-size:clamp(13px,1.3vw,15px);
+  letter-spacing:.16em;color:var(--zona-soft);
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  align-self:stretch;display:flex;align-items:center;
+}
+.route-body{min-width:0}
+.route-kicker{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--zona-soft);display:block;margin-bottom:8px;
+}
+.route-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:clamp(24px,3.2vw,38px);
+  line-height:1;color:var(--testo);margin-bottom:10px;letter-spacing:-.01em;
+}
+.route-desc{font-size:14.5px;line-height:1.55;color:var(--testo-soft);max-width:54ch}
+.route-tags{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.route-tags li{
+  font-size:12px;color:var(--testo-soft);
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  padding:5px 9px;background:rgba(255,255,255,.02);
+}
+.route-go{
+  width:44px;height:44px;flex:0 0 auto;
+  border:1px solid var(--linea);border-radius:50%;
+  display:grid;place-items:center;color:var(--testo-soft);
+  transition:transform .4s var(--ease),border-color .35s,color .35s,background .35s;
+}
+.route-go svg{width:17px;height:17px}
+.route:hover .route-go{
+  background:var(--zona);border-color:var(--zona);color:var(--inchiostro);
+  transform:rotate(45deg);
+}
+
+/* ---- BLOCCO "CUORE DI FAMIGLIA" --------------------------------------- */
+.family{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(28px,5vw,64px);align-items:center;
+}
+.family-figure{
+  position:relative;
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  background:linear-gradient(160deg,var(--carbone),var(--carbone-2));
+  padding:clamp(28px,4vw,44px);
+  min-height:280px;display:flex;flex-direction:column;justify-content:center;gap:18px;
+  overflow:hidden;
+}
+.family-figure::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 80% at 20% 0%, rgba(31,122,110,.16), transparent 55%),
+    radial-gradient(60% 80% at 90% 100%, rgba(192,138,60,.16), transparent 55%);
+}
+.family-figure .duo{position:relative;z-index:1;display:flex;gap:14px;flex-wrap:wrap}
+.duo-card{
+  flex:1 1 130px;border:1px solid var(--linea);border-radius:var(--bordo-r);
+  padding:16px 16px 18px;background:rgba(11,14,18,.5);
+}
+.duo-card .role{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.duo-card .role svg{width:16px;height:16px}
+.duo-card.lui .role{color:var(--mare-soft)}
+.duo-card.lei .role{color:var(--sartoria-soft)}
+.duo-card p{font-size:13.5px;line-height:1.5;color:var(--testo-soft)}
+.duo-card .name{color:var(--testo);font-weight:600}
+
+.family-copy .eyebrow{margin-bottom:16px}
+.family-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:clamp(26px,3.6vw,40px);
+  line-height:1.05;letter-spacing:-.01em;color:var(--testo);margin-bottom:16px;
+}
+.family-copy p{color:var(--testo-soft);line-height:1.65;margin-bottom:14px;max-width:52ch}
+.family-copy .inline-link{
+  color:var(--sartoria-soft);border-bottom:1px solid color-mix(in srgb,var(--sartoria) 40%,transparent);
+  transition:color .2s,border-color .2s;
+}
+.family-copy .inline-link:hover{color:var(--testo);border-color:var(--sartoria)}
+
+/* ---- BLOCCO ETHOS (perché niente foto / niente prezzi) ----------------- */
+.ethos{
+  border-block:1px solid var(--linea);
+  background:linear-gradient(180deg,var(--carbone-2),var(--inchiostro));
+}
+.ethos .container{padding-block:clamp(48px,8vh,88px)}
+.ethos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+.ethos-claim{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:clamp(24px,3.4vw,40px);
+  line-height:1.05;letter-spacing:-.01em;color:var(--testo);
+  margin-bottom:clamp(28px,4vh,44px);display:flex;align-items:center;gap:14px;
+}
+.ethos-claim .star{color:var(--sartoria);flex:0 0 auto}
+.ethos-claim .star svg{width:22px;height:22px;display:block}
+.ethos-item .ethos-h{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:16px;color:var(--testo);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.ethos-item .ethos-h .dot{width:7px;height:7px;border-radius:50%;background:var(--sartoria);flex:0 0 auto}
+.ethos-item p{font-size:14.5px;line-height:1.6;color:var(--testo-soft)}
+
+/* ---- SEZIONE CONTATTO (home + pagina) --------------------------------- */
+.contact{border-top:1px solid var(--linea);background:var(--carbone-2)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(28px,5vw,64px);align-items:start;
+}
+.contact-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:clamp(28px,4vw,46px);
+  line-height:1.04;letter-spacing:-.01em;color:var(--testo);margin-bottom:16px;
+}
+.contact-lead{color:var(--testo-soft);line-height:1.65;margin-bottom:26px;max-width:46ch}
+.contact-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+
+/* card recapiti */
+.contact-cards{display:grid;gap:12px}
+.contact-card{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;min-height:44px;
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  background:var(--carbone);color:var(--testo-soft);
+  transition:border-color .25s,color .25s,transform .25s var(--ease);
+}
+.contact-card svg{width:20px;height:20px;flex:0 0 auto;color:var(--testo-faint);transition:color .25s}
+.contact-card .cc-label{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--testo-faint);display:block;margin-bottom:3px;
+}
+.contact-card .cc-value{color:var(--testo);font-size:15px;word-break:break-word}
+a.contact-card:hover{border-color:var(--sartoria);transform:translateY(-2px)}
+a.contact-card:hover svg{color:var(--sartoria-soft)}
+
+/* ---- FOOTER ------------------------------------------------------------ */
+.site-footer{
+  border-top:1px solid var(--linea);
+  background:var(--inchiostro);
+}
+.footer-top{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  gap:clamp(28px,4vw,52px);
+  padding-block:clamp(40px,6vh,64px);
+}
+.footer-brand .brand{margin-bottom:16px}
+.footer-claim{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:18px;color:var(--testo);line-height:1.3;max-width:30ch;margin-bottom:8px;
+}
+.footer-brand p{color:var(--testo-soft);font-size:14px;line-height:1.6;max-width:34ch}
+.footer-col h4{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--testo-faint);margin-bottom:14px;
+}
+.footer-col ul{list-style:none;display:grid;gap:10px}
+.footer-col a,.footer-col span{font-size:14px;color:var(--testo-soft);line-height:1.5}
+.footer-col a{transition:color .2s}
+.footer-col a:hover{color:var(--testo)}
+.footer-legal{
+  border-top:1px solid var(--linea);
+  padding-block:18px 24px;
+  display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;
+  font-size:12px;color:var(--testo-faint);line-height:1.7;
+}
+.footer-legal b{color:var(--testo-soft);font-weight:500}
+.footer-legal .sep{opacity:.4}
+.footer-copy{font-size:11.5px;color:var(--testo-faint);padding-bottom:24px}
+
+/* ---- MODALE FORM ------------------------------------------------------- */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(5,7,10,.82);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-backdrop.open{display:flex}
+.modal{
+  background:var(--carbone);border:1px solid var(--linea);border-radius:var(--bordo-r);
+  max-width:540px;width:100%;
+  max-height:calc(100dvh - 40px);overflow-y:auto;
+  padding:clamp(24px,4vw,40px);position:relative;
+  animation:modal-in .3s var(--ease);
+}
+@keyframes modal-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.modal{animation:none}}
+.modal-close{
+  position:absolute;top:14px;right:16px;
+  width:40px;height:40px;display:grid;place-items:center;
+  background:none;border:1px solid transparent;border-radius:var(--bordo-r);
+  color:var(--testo-faint);font-size:20px;line-height:1;cursor:pointer;transition:color .2s,border-color .2s;
+}
+.modal-close:hover{color:var(--testo);border-color:var(--linea)}
+.modal-eyebrow{margin-bottom:14px}
+.modal-title{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(22px,3vw,30px);color:var(--testo);line-height:1.08;
+  margin-bottom:8px;letter-spacing:-.01em;
+}
+.modal-sub{color:var(--testo-soft);font-size:14.5px;line-height:1.55;margin-bottom:22px}
+
+/* ---- FORM -------------------------------------------------------------- */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:16px}
+.form-label{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--sartoria-soft);
+  display:block;margin-bottom:7px;
+}
+.form-label .opt{color:var(--testo-faint);font-weight:600;letter-spacing:.04em;text-transform:none}
+.form-input,.form-textarea{
+  width:100%;background:var(--inchiostro);
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  color:var(--testo);padding:12px 14px;
+  font-family:"Schibsted Grotesk",system-ui,sans-serif;font-size:15px;
+  transition:border-color .2s;outline:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--testo-faint)}
+.form-input:focus,.form-textarea:focus{border-color:color-mix(in srgb,var(--sartoria) 60%,transparent)}
+.form-textarea{resize:vertical;min-height:110px}
+
+.form-consent{
+  display:flex;align-items:flex-start;gap:11px;
+  font-size:13px;line-height:1.55;color:var(--testo-soft);
+  margin:4px 0 6px;cursor:pointer;
+}
+.form-consent input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;
+  width:18px;height:18px;flex:0 0 auto;margin-top:2px;
+  background:var(--inchiostro);border:1px solid color-mix(in srgb,var(--sartoria) 45%,transparent);
+  border-radius:3px;cursor:pointer;position:relative;transition:background .2s,border-color .2s;
+}
+.form-consent input[type=checkbox]:checked{background:var(--sartoria);border-color:var(--sartoria)}
+.form-consent input[type=checkbox]:checked::after{
+  content:"";position:absolute;left:5px;top:1.5px;width:5px;height:10px;
+  border:solid var(--inchiostro);border-width:0 2px 2px 0;transform:rotate(45deg);
+}
+.form-consent a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:2px}
+.form-consent a:hover{color:var(--testo)}
+.form-consent .req{color:var(--sartoria-soft)}
+
+.form-submit{
+  width:100%;margin-top:18px;min-height:48px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;
+  letter-spacing:.02em;color:var(--inchiostro);background:var(--sartoria);
+  border:none;border-radius:var(--bordo-r);padding:14px;cursor:pointer;
+  transition:filter .25s;
+}
+.form-submit:hover{filter:brightness(1.08)}
+.form-submit[disabled]{opacity:.55;cursor:wait;filter:none}
+
+.form-status{
+  margin-top:14px;min-height:1.4em;font-size:13px;line-height:1.5;
+  color:var(--testo-soft);text-align:center;
+}
+.form-status.ok{color:var(--mare-soft)}
+.form-status.err{color:#e0775f}
+
+/* honeypot anti-spam, invisibile agli umani */
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---- REVEAL (load + scroll) -------------------------------------------- */
+.rv{transition:opacity .8s ease,transform .8s var(--ease);opacity:1;transform:none}
+.rv.rv-pre{opacity:0;transform:translateY(18px)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}
+.rv-d2{transition-delay:.2s}
+.rv-d3{transition-delay:.3s}
+
+/* ---- COOKIE BANNER ----------------------------------------------------- */
+.cookie-banner{
+  position:fixed;z-index:700;
+  left:clamp(14px,3vw,28px);right:clamp(14px,3vw,28px);
+  bottom:clamp(14px,3vw,28px);
+  background:rgba(11,14,18,.97);border:1px solid var(--linea);border-radius:var(--bordo-r);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  padding:clamp(16px,2.5vw,22px) clamp(18px,3vw,28px);
+  display:none;opacity:0;transform:translateY(18px);
+  transition:opacity .4s ease,transform .4s var(--ease);
+  box-shadow:0 -2px 40px rgba(0,0,0,.55);
+}
+.cookie-banner.show{display:block}
+.cookie-banner.show.in{opacity:1;transform:none}
+.cb-inner{display:flex;align-items:center;gap:clamp(16px,3vw,28px);max-width:var(--maxw);margin-inline:auto;flex-wrap:wrap}
+.cb-text{flex:1;min-width:240px}
+.cb-text strong{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--sartoria-soft);
+  display:block;margin-bottom:6px;
+}
+.cb-text p{font-size:13.5px;line-height:1.55;color:var(--testo-soft)}
+.cb-text a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:2px}
+.cb-text a:hover{color:var(--testo)}
+.cb-actions{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.cb-btn{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.04em;padding:11px 20px;min-height:44px;cursor:pointer;
+  border:1px solid transparent;border-radius:var(--bordo-r);min-width:108px;white-space:nowrap;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.cb-accept{background:var(--sartoria);color:var(--inchiostro);border-color:var(--sartoria)}
+.cb-accept:hover{filter:brightness(1.08)}
+.cb-deny,.cb-custom{background:transparent;color:var(--testo-soft);border-color:var(--linea)}
+.cb-deny:hover,.cb-custom:hover{border-color:var(--sartoria);color:var(--testo)}
+.cb-close{
+  position:absolute;top:10px;right:12px;width:34px;height:34px;
+  display:grid;place-items:center;background:none;border:none;border-radius:50%;
+  color:var(--testo-faint);font-size:18px;line-height:1;cursor:pointer;transition:color .2s;
+}
+.cb-close:hover{color:var(--testo)}
+.cb-prefs{max-width:var(--maxw);margin:18px auto 0;border-top:1px solid var(--linea);padding-top:18px}
+.cb-prefs[hidden]{display:none}
+.cb-pref-row{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
+  padding:12px 0;border-bottom:1px solid var(--linea-soft);
+}
+.cb-pref-info{flex:1;min-width:0}
+.cb-pref-info strong{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--testo);display:block;margin-bottom:4px;
+}
+.cb-pref-info p{font-size:12.5px;line-height:1.5;color:var(--testo-soft)}
+.cb-prefs-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.cb-switch{position:relative;display:inline-block;width:46px;height:26px;flex:0 0 auto}
+.cb-switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.cb-slider{
+  position:absolute;inset:0;background:rgba(255,255,255,.1);
+  border:1px solid var(--linea);border-radius:26px;transition:background .25s,border-color .25s;
+}
+.cb-slider::before{
+  content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;
+  background:var(--testo-soft);border-radius:50%;transition:transform .25s,background .25s;
+}
+.cb-switch input:checked + .cb-slider{background:var(--sartoria);border-color:var(--sartoria)}
+.cb-switch input:checked + .cb-slider::before{transform:translateX(20px);background:var(--inchiostro)}
+.cb-switch input:disabled{cursor:not-allowed}
+.cb-switch input:disabled + .cb-slider{opacity:.5}
+.cb-switch input:focus-visible + .cb-slider{outline:2px solid var(--sartoria);outline-offset:2px}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:clamp(32px,6vw,48px)}
+  .hero-compass{order:-1}
+  .hero-compass svg{width:min(240px,60%)}
+  .family{grid-template-columns:1fr}
+  .ethos-grid{grid-template-columns:1fr;gap:24px}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1 / -1}
+}
+
+@media(max-width:760px){
+  :root{--header-h:60px}
+  /* nav -> menu mobile a tendina */
+  .nav{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(11,14,18,.99);
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--linea);
+    padding:8px 0;display:none;
+  }
+  .nav.open{display:flex}
+  .nav-link{padding:14px var(--gutter);border-radius:0;font-size:15px}
+  .nav-link::after{display:none}
+  .burger{display:flex}
+  /* in header tengo solo la CTA mail compatta accanto all'hamburger */
+  .header-actions .btn-cta .lbl-long{display:none}
+  .header-actions .btn-cta .lbl-short{display:inline}
+
+  .route{grid-template-columns:auto 1fr;gap:16px}
+  .route-go{display:none}              /* su mobile l'intero blocco è il link */
+  .route::after{width:4px}
+
+  .footer-top{grid-template-columns:1fr;gap:28px}
+  .ethos-claim{font-size:clamp(22px,7vw,30px)}
+}
+
+@media(min-width:761px){
+  .header-actions .btn-cta .lbl-short{display:none}
+}
+
+@media(max-width:480px){
+  .form-row{grid-template-columns:1fr;gap:0}
+  .hero-ctas .btn-cta,.hero-ctas .btn-ghost{flex:1 1 100%;justify-content:center}
+  .cb-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .cb-actions .cb-accept{grid-column:1 / -1}
+  .cb-btn{width:100%;min-width:0}
+}
+
+/* ---- REDUCED MOTION ---------------------------------------------------- */
+@media(prefers-reduced-motion:reduce){
+  *{transition-duration:.001ms !important;animation-duration:.001ms !important;animation-iteration-count:1 !important}
+  .rv,.rv.rv-pre{opacity:1 !important;transform:none !important}
+  html{scroll-behavior:auto}
+}
+
+/* =========================================================================
+   COMPONENTI PAGINE INTERNE (natanti / sartoria / auto / chi siamo)
+   Riusano i token e i font esistenti: niente stile scollegato.
+   ========================================================================= */
+
+/* Accento di zona a livello pagina: si imposta data-zona sul <main>, così
+   eyebrow, numeri e bordi delle pagine seguono il colore del servizio.
+   (la regola .route[data-zona] resta più specifica e non viene toccata) */
+[data-zona="mare"]    {--zona:var(--mare);    --zona-soft:var(--mare-soft);    --zona-glow:rgba(31,122,110,.30)}
+[data-zona="sartoria"]{--zona:var(--sartoria);--zona-soft:var(--sartoria-soft);--zona-glow:rgba(192,138,60,.28)}
+[data-zona="strada"]  {--zona:var(--strada);  --zona-soft:var(--strada-soft);  --zona-glow:rgba(107,119,133,.32)}
+
+/* eyebrow che prende il colore-zona invece del grigio neutro */
+.eyebrow.zona{color:var(--zona-soft)}
+.eyebrow.zona::before{background:var(--zona)}
+
+/* su queste pagine l'ago nord della bussola segue la zona */
+[data-zona] .hero-compass .needle-n{fill:var(--zona)}
+
+/* PROCESSO A TAPPE — "come lavoriamo" */
+.steps{display:grid;gap:14px;counter-reset:step}
+.step{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.5vw,24px);align-items:start;
+  padding:clamp(18px,2.5vw,26px) clamp(18px,2.5vw,28px);
+  background:var(--carbone);border:1px solid var(--linea);border-radius:var(--bordo-r);
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.step:hover{border-color:color-mix(in srgb,var(--zona,var(--sartoria)) 45%,var(--linea));transform:translateY(-2px)}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(22px,3vw,32px);color:var(--zona-soft,var(--sartoria-soft));
+  line-height:1;letter-spacing:.02em;
+}
+.step h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;color:var(--testo);margin-bottom:6px}
+.step p{font-size:14.5px;line-height:1.6;color:var(--testo-soft);max-width:62ch}
+
+/* DUE PERCORSI / PANNELLI affiancati */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,24px)}
+.panel{
+  position:relative;overflow:hidden;
+  background:var(--carbone);border:1px solid var(--linea);border-radius:var(--bordo-r);
+  padding:clamp(22px,3vw,32px);
+}
+.panel::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--zona,var(--sartoria))}
+.panel .eyebrow{margin-bottom:14px}
+.panel h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,26px);color:var(--testo);margin-bottom:12px;line-height:1.1;letter-spacing:-.01em}
+.panel > p{font-size:14.5px;line-height:1.6;color:var(--testo-soft);margin-bottom:16px;max-width:46ch}
+
+/* CHECKLIST — cosa facciamo / cosa no */
+.checklist{list-style:none;display:grid;gap:12px}
+.checklist li{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;font-size:15px;line-height:1.5;color:var(--testo-soft)}
+.checklist li b{color:var(--testo);font-weight:600}
+.checklist .ico{width:23px;height:23px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;margin-top:1px}
+.checklist .ico svg{width:13px;height:13px}
+.checklist.yes .ico{color:var(--zona-soft,var(--mare-soft));border:1px solid color-mix(in srgb,var(--zona,var(--mare)) 50%,var(--linea))}
+.checklist.no .ico{color:var(--strada-soft);border:1px solid var(--linea);opacity:.85}
+
+/* NOTA BOZZA — contenuti veri ma da confermare col titolare */
+.note-draft{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  border:1px dashed color-mix(in srgb,var(--sartoria) 50%,var(--linea));
+  border-left:3px solid var(--sartoria);
+  background:rgba(192,138,60,.06);border-radius:var(--bordo-r);
+  padding:16px 18px;margin-top:24px;
+}
+.note-draft .ico{color:var(--sartoria-soft);flex:0 0 auto;margin-top:2px}
+.note-draft .ico svg{width:20px;height:20px}
+.note-draft .label{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sartoria-soft);display:block;margin-bottom:5px}
+.note-draft p{font-size:13.5px;line-height:1.55;color:var(--testo-soft)}
+.note-draft a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:2px}
+
+/* prose semplice (paragrafi lunghi nelle pagine) */
+.prose{max-width:64ch}
+.prose p{color:var(--testo-soft);line-height:1.7;margin-bottom:16px;font-size:clamp(15px,1.4vw,16.5px)}
+.prose p b{color:var(--testo);font-weight:600}
+
+/* CTA di chiusura pagina (riusa la sezione .contact, contenuto centrato) */
+.cta-band{text-align:center;max-width:60ch;margin-inline:auto}
+.cta-band .contact-ctas{justify-content:center}
+
+@media(max-width:760px){
+  .split{grid-template-columns:1fr}
+}
+
+/* ACRONIMO GEFF — le iniziali della famiglia: Giulia · Enrico · Filippo · Francesca.
+   È il "cuore" del marchio: quattro nomi veri sotto una sola insegna. */
+.acronimo{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,18px)}
+.lettera{
+  position:relative;overflow:hidden;isolation:isolate;
+  background:var(--carbone);border:1px solid var(--linea);border-radius:var(--bordo-r);
+  padding:clamp(22px,3vw,32px) clamp(14px,2vw,20px);text-align:center;
+  transition:transform .35s var(--ease),border-color .35s;
+}
+.lettera::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(90% 130% at 50% 125%,var(--zona-glow,rgba(192,138,60,.28)),transparent 66%);
+  opacity:.5;transition:opacity .35s var(--ease);
+}
+.lettera:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--zona,var(--sartoria)) 50%,var(--linea))}
+.lettera:hover::before{opacity:.95}
+.lettera .big{
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(46px,8vw,76px);line-height:.85;letter-spacing:-.02em;
+  color:var(--zona-soft,var(--sartoria-soft));
+}
+.lettera .nome{
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:clamp(15px,1.7vw,18px);color:var(--testo);margin-top:12px;
+}
+.lettera .rel{
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--testo-faint);margin-top:5px;
+}
+@media(max-width:560px){.acronimo{grid-template-columns:repeat(2,1fr)}}

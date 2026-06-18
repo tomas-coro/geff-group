@@ -1,0 +1,3 @@
+# Anteprima/bozza: non indicizzare finché il sito non è validato e lanciato.
+User-agent: *
+Disallow: /

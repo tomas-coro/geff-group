@@ -1,0 +1,235 @@
+<!-- BOZZA legale: testi adattati da relacs, DA FAR VALIDARE al titolare -->
+<!-- NOTA: il modello di partenza (relacs) era un e-commerce con vendita online e prezzi.
+     GEFF Group NON vende online, non espone prezzi e lavora su consulenza/compravendita.
+     I testi qui sono stati riadattati al contesto ma vanno verificati da un legale. -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e12">
+<title>Condizioni di Vendita — GEFF Group</title>
+<meta name="description" content="Condizioni generali relative ai rapporti di compravendita e consulenza con GEFF Group S.R.L.S. — natanti, sartoria nautica e auto usate.">
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbone-2:#0f1318;--inchiostro:#0b0e12;
+    --testo:#e8e6df;--testo-soft:rgba(232,230,223,.66);--testo-faint:rgba(232,230,223,.42);
+    --linea:rgba(232,230,223,.12);--sartoria:#c08a3c;--sartoria-soft:#d6a558;--bordo-r:2px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:80px}
+  body{
+    background:var(--inchiostro);color:var(--testo-soft);
+    font-family:"Schibsted Grotesk",system-ui,sans-serif;
+    font-size:16px;line-height:1.75;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:clamp(14px,2.5vw,20px) clamp(20px,5vw,52px);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:linear-gradient(to bottom,rgba(11,14,18,.92) 0%,transparent 100%);
+  }
+  .nav-logo{display:flex;align-items:center;gap:10px;color:var(--testo)}
+  .nav-logo svg{width:26px;height:26px}
+  .nav-logo .name{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;letter-spacing:.02em}
+  .nav-logo .name span{color:var(--testo-soft);font-weight:600}
+  .nav-back{color:var(--sartoria-soft);font-family:"Bricolage Grotesque",sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:color .2s}
+  .nav-back::before{content:"\2190  ";opacity:.7}
+  .nav-back:hover{color:var(--testo)}
+  main{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:clamp(104px,15vh,150px) clamp(20px,5vw,52px) clamp(60px,8vh,100px)}
+  a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+  a:hover{color:var(--testo)}
+  .draft-flag{border:1px dashed color-mix(in srgb,var(--sartoria) 50%,transparent);border-radius:var(--bordo-r);
+    background:rgba(192,138,60,.07);color:var(--sartoria-soft);padding:12px 16px;font-size:13px;line-height:1.5;margin-bottom:28px}
+  .eyebrow{font-family:"Bricolage Grotesque",sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--testo-faint);
+    display:inline-flex;align-items:center;gap:12px;margin-bottom:14px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--sartoria)}
+  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--testo);
+    letter-spacing:-.01em;line-height:1.05;font-size:clamp(30px,5vw,50px);margin-bottom:20px}
+  .lead{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(17px,2vw,21px);color:var(--sartoria-soft);
+    line-height:1.4;margin-bottom:clamp(28px,4vh,40px)}
+  .last-update{font-size:12px;letter-spacing:.1em;color:var(--testo-faint);text-transform:uppercase;
+    margin-bottom:clamp(36px,5vh,56px);padding-bottom:clamp(24px,4vh,36px);border-bottom:1px solid var(--linea)}
+  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--testo);
+    letter-spacing:-.005em;line-height:1.2;font-size:clamp(18px,2.4vw,24px);
+    margin:clamp(36px,6vh,52px) 0 16px;padding-bottom:10px;border-bottom:1px solid var(--linea);
+    display:flex;align-items:baseline;gap:14px}
+  h2 .num{color:var(--sartoria-soft);font-size:.78em;font-weight:700}
+  h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--testo);
+    letter-spacing:.04em;font-size:clamp(13px,1.4vw,15px);text-transform:uppercase;margin:24px 0 10px}
+  p{margin-bottom:14px}
+  ul,ol{padding-left:22px;margin-bottom:14px}
+  li{margin-bottom:6px}
+  li::marker{color:var(--sartoria)}
+  strong{color:var(--testo);font-weight:600}
+  .highlight-box{border:1px solid color-mix(in srgb,var(--sartoria) 18%,transparent);border-radius:var(--bordo-r);
+    padding:20px 24px;margin:24px 0;background:rgba(192,138,60,.05)}
+  .highlight-box p{margin-bottom:0}
+  .form-box{border:1px solid var(--linea);border-radius:var(--bordo-r);padding:20px 24px;margin:24px 0;
+    background:rgba(255,255,255,.015);font-size:13.5px;line-height:1.9;color:var(--testo-soft)}
+  .form-box strong{color:var(--testo)}
+  footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:clamp(28px,4vh,40px) clamp(20px,5vw,52px);
+    text-align:center;font-size:12px;letter-spacing:.06em;color:var(--testo-faint)}
+  footer a{color:var(--testo-faint);text-decoration:none}
+  footer a:hover{color:var(--sartoria-soft)}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html" aria-label="GEFF Group — Home">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><path d="M16 5 L20 16 L16 27 L12 16 Z" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.6" fill="#0f1318" stroke="none"/></svg>
+    <span class="name">GEFF <span>GROUP</span></span>
+  </a>
+  <a class="nav-back" href="index.html">Torna al sito</a>
+</nav>
+
+<main>
+  <p class="draft-flag">Bozza legale — testi adattati da un sito precedente (un e-commerce) e riformulati per il contesto di GEFF Group, che opera su consulenza e compravendita e non vende online. <strong>Da far validare al titolare e a un consulente legale</strong> prima della pubblicazione.</p>
+  <div class="eyebrow">Documento legale</div>
+  <h1>Condizioni Generali</h1>
+  <p class="lead">Le presenti condizioni disciplinano i rapporti di consulenza e compravendita tra GEFF Group e il Cliente privato.</p>
+  <p class="last-update">Ultimo aggiornamento: da definire</p>
+
+  <h2><span class="num">01</span>Venditore e ambito di applicazione</h2>
+  <p>Il sito <strong>geffgroup.it</strong> è gestito da <strong>GEFF GROUP S.R.L.S.</strong>, con sede legale in Vicolo Gorgo 5, 33100 Udine (UD) — P.IVA / C.F. 03146260306, REA UD-372874, iscritta al Registro delle Imprese di Udine (di seguito "la Società" o "il Venditore"). Contatto: <a href="mailto:info@geffgroup.it">info@geffgroup.it</a>.</p>
+  <p>Le presenti Condizioni Generali (di seguito "Condizioni") si applicano ai rapporti di consulenza, intermediazione e compravendita aventi a oggetto natanti, accessori e manufatti di sartoria nautica su misura e autoveicoli usati, nel rispetto del D.Lgs. 206/2005 (Codice del Consumo) come modificato dal D.Lgs. 9/2024 e della normativa applicabile.</p>
+  <p>Il sito ha finalità esclusivamente informative e di contatto: <strong>non costituisce un negozio online</strong> e non consente la conclusione di acquisti per via telematica. Eventuali rapporti di compravendita si perfezionano al di fuori del sito, previo contatto e accordo tra le parti.</p>
+  <p>Avviando un rapporto con la Società, il Cliente dichiara di aver letto, compreso e accettato le presenti Condizioni per le parti applicabili.</p>
+
+  <h2><span class="num">02</span>Servizi e disponibilità</h2>
+  <p>La Società offre servizi di consulenza e intermediazione nella scelta e nella compravendita di natanti, la realizzazione di accessori e manufatti di sartoria nautica su misura, nonché il ritiro e la vendita di autoveicoli usati. I beni proposti sono descritti di volta in volta nel corso del rapporto con il Cliente; il sito non riporta schede prodotto né listini.</p>
+  <p>La disponibilità dei beni e dei servizi può variare nel tempo. In caso di indisponibilità sopravvenuta di un bene per il quale fosse già stato concordato un impegno, il Venditore ne darà tempestiva comunicazione al Cliente e provvederà alla restituzione di eventuali somme già versate.</p>
+
+  <h2><span class="num">03</span>Prezzi e preventivi</h2>
+  <p>Il sito <strong>non espone prezzi</strong>. Le condizioni economiche di ciascun rapporto vengono definite caso per caso e comunicate al Cliente in forma di preventivo o accordo scritto prima della conclusione, tenuto conto della natura del bene o del servizio. Gli importi si intendono comprensivi delle imposte di legge applicabili, salvo diversa indicazione.</p>
+  <p>In caso di errore manifesto in una quotazione comunicata, la Società si riserva di rettificarla dandone immediata comunicazione al Cliente.</p>
+
+  <h2><span class="num">04</span>Conclusione del contratto</h2>
+  <p>Il rapporto con la Società prende avvio con il contatto del Cliente (modulo del sito, e-mail o telefono) e prosegue, ove le parti lo concordino, nelle seguenti fasi:</p>
+  <ol>
+    <li>analisi della richiesta e della situazione del Cliente;</li>
+    <li>proposta di consulenza, valutazione del bene o preventivo;</li>
+    <li>verifica e condivisione dei termini economici e operativi;</li>
+    <li>conferma scritta dell'accordo tra le parti — momento in cui il contratto si considera concluso;</li>
+    <li>esecuzione (compravendita, lavorazione su misura, pratiche, consegna o ritiro).</li>
+  </ol>
+  <p>Il contratto è redatto e disponibile in <strong>lingua italiana</strong>. La Società si riserva il diritto di non dar seguito a una richiesta in caso di informazioni incomplete o errate fornite dal Cliente, indisponibilità del bene, o richieste anomale.</p>
+
+  <h2><span class="num">05</span>Pagamento</h2>
+  <p>Le modalità e i tempi di pagamento sono concordati tra le parti per ciascun rapporto e indicati nel preventivo o nell'accordo scritto. Sono accettati, in via indicativa, <strong>bonifico bancario</strong> sul conto intestato a GEFF GROUP S.R.L.S., <strong>POS</strong> (carta/bancomat) e <strong>contanti</strong>, questi ultimi nei limiti previsti dal D.Lgs. 231/2007 e successive modifiche in materia di antiriciclaggio.</p>
+  <p>Tutte le transazioni sono gestite nel rispetto delle normative vigenti in materia di sicurezza dei pagamenti.</p>
+
+  <h2><span class="num">06</span>Consegna e ritiro</h2>
+  <p>Le modalità di consegna del bene o di esecuzione del servizio (consegna, ritiro presso la sede, lavorazione su misura) sono concordate tra le parti. I tempi indicati hanno valore puramente indicativo e non costituiscono termine essenziale del contratto, salvo diverso accordo scritto. In caso di ritardo significativo non imputabile a cause di forza maggiore, il Cliente sarà informato tempestivamente e potrà concordare un nuovo termine o la risoluzione del contratto con restituzione delle somme versate.</p>
+  <p>Il rischio di perdita o danneggiamento dei beni si trasferisce al Cliente nel momento in cui questi, o un terzo da lui designato, ne acquisisce il possesso fisico.</p>
+
+  <h2><span class="num">07</span>Diritto di recesso</h2>
+  <div class="highlight-box">
+    <p>Ai sensi degli articoli 52 e seguenti del D.Lgs. 206/2005, ove il contratto sia concluso a distanza o fuori dei locali commerciali, il Cliente consumatore ha diritto di recedere <strong>senza alcuna penalità e senza specificarne il motivo</strong>, entro <strong>14 giorni</strong> dalla conclusione del contratto o, per i beni, dalla data in cui acquisisce il possesso fisico del bene.</p>
+  </div>
+  <p>Per esercitare il diritto di recesso, il Cliente deve comunicare la propria decisione mediante una dichiarazione esplicita (lettera raccomandata, e-mail o PEC) inviata a:</p>
+  <ul>
+    <li>E-mail: <a href="mailto:info@geffgroup.it">info@geffgroup.it</a></li>
+    <li>PEC: <a href="mailto:geffgroup@pec.it">geffgroup@pec.it</a></li>
+    <li>Sede legale: GEFF GROUP S.R.L.S., Vicolo Gorgo 5, 33100 Udine (UD)</li>
+  </ul>
+  <p>Il Cliente può utilizzare il modulo di recesso standard riportato in calce (Appendice A), ma non è obbligato a farlo: è sufficiente una comunicazione scritta chiara e inequivocabile, trasmessa prima della scadenza del periodo di recesso.</p>
+
+  <h3>Restituzione del bene</h3>
+  <p>A seguito del recesso, il Cliente è tenuto a restituire i beni senza indebito ritardo e in ogni caso entro <strong>14 giorni</strong> dalla comunicazione del recesso. Le spese dirette di restituzione sono a carico del Cliente, salvo diverso accordo scritto. I beni devono essere restituiti nelle stesse condizioni in cui sono stati ricevuti. Il Cliente è responsabile della <strong>diminuzione del valore dei beni</strong> risultante da una manipolazione diversa da quella necessaria per stabilirne natura, caratteristiche e funzionamento.</p>
+
+  <h3>Rimborso</h3>
+  <p>La Società rimborserà i pagamenti ricevuti dal Cliente, incluse le eventuali spese di consegna standard, senza indebito ritardo e in ogni caso entro <strong>14 giorni</strong> dal giorno in cui è informata della decisione di recesso. Il rimborso sarà effettuato con lo stesso mezzo di pagamento utilizzato per la transazione iniziale, salvo diverso accordo. Il Venditore può trattenere il rimborso fino alla ricezione dei beni restituiti o fino alla prova dell'avvenuta spedizione da parte del Cliente.</p>
+
+  <h2><span class="num">08</span>Esclusioni dal diritto di recesso</h2>
+  <p>Ai sensi dell'art. 59 del D.Lgs. 206/2005, il diritto di recesso è escluso, tra l'altro, per:</p>
+  <ul>
+    <li>beni <strong>realizzati su misura o chiaramente personalizzati</strong> in base alle specifiche del Cliente — in particolare i manufatti di sartoria nautica confezionati sulle misure della singola imbarcazione — in quanto beni che non possono essere rimessi in vendita;</li>
+    <li>beni che, dopo la consegna, risultino per loro natura inscindibilmente mescolati con altri beni;</li>
+    <li>contratti per i quali il recesso sia diversamente escluso o limitato dalla legge in ragione della natura del bene.</li>
+  </ul>
+  <p>Il Cliente sarà informato in modo chiaro, prima di concludere il contratto, qualora il bene o servizio scelto rientri in una delle suddette categorie di esclusione.</p>
+
+  <h2><span class="num">09</span>Garanzia legale di conformità</h2>
+  <p>I beni venduti dalla Società a Clienti consumatori sono coperti dalla <strong>garanzia legale di conformità</strong> prevista dagli articoli 128–135-octies del D.Lgs. 206/2005, come modificati dal D.Lgs. 9/2024 in attuazione della Direttiva UE 2019/771.</p>
+  <p>Per i beni usati, la durata della garanzia può essere ridotta per accordo tra le parti nei limiti consentiti dalla legge e, comunque, non inferiore a un anno. Per i beni nuovi e per i manufatti realizzati dalla Società la garanzia ha durata di <strong>24 mesi</strong> dalla consegna al consumatore.</p>
+  <p>In caso di difetto di conformità, il Cliente ha diritto, a sua scelta, al ripristino della conformità tramite <strong>riparazione o sostituzione</strong> del bene. Ove tali rimedi risultino impossibili, sproporzionati o non attuati entro un termine congruo, il Cliente ha diritto a una <strong>riduzione adeguata del prezzo</strong> o alla <strong>risoluzione del contratto</strong>.</p>
+  <p>Sono esclusi dalla garanzia legale i difetti derivanti da: uso improprio o non conforme alle istruzioni, negligenza, danni accidentali, manomissioni, riparazioni non autorizzate o normale usura. Per segnalare un difetto, il Cliente è tenuto a contattare la Società a <a href="mailto:info@geffgroup.it">info@geffgroup.it</a>, descrivendo il difetto e allegando, ove possibile, documentazione fotografica.</p>
+
+  <h2><span class="num">10</span>Responsabilità</h2>
+  <p>La Società non sarà responsabile per danni indiretti, consequenziali o perdite di profitto derivanti dall'uso o dall'impossibilità di utilizzo dei beni acquistati, salvo i casi di dolo o colpa grave ai sensi dell'art. 1229 c.c. La responsabilità della Società per qualsiasi reclamo è in ogni caso limitata al valore del bene o del servizio oggetto del rapporto.</p>
+  <p>Le informazioni contenute nel sito sono fornite a scopo puramente illustrativo; la Società non garantisce che il sito sia sempre disponibile o privo di errori tecnici, e non risponde di interruzioni del servizio dovute a cause esterne.</p>
+
+  <h2><span class="num">11</span>Forza maggiore</h2>
+  <p>La Società non è responsabile per ritardi o inadempimenti causati da eventi straordinari e imprevedibili al di fuori del proprio ragionevole controllo, inclusi a titolo esemplificativo: calamità naturali, epidemie, scioperi di vettori o fornitori, blocchi doganali, provvedimenti dell'autorità pubblica, interruzioni di pubblici servizi o difficoltà di approvvigionamento delle materie prime ("Forza Maggiore").</p>
+  <p>In caso di Forza Maggiore, la Società informerà il Cliente nel più breve tempo possibile e sospenderà le proprie obbligazioni per la durata dell'evento. Se l'impedimento si protrae per più di <strong>60 giorni</strong>, ciascuna parte potrà risolvere il contratto con restituzione delle somme già versate, senza ulteriori indennizzi.</p>
+
+  <h2><span class="num">12</span>Fatturazione e documentazione fiscale</h2>
+  <p>Per ogni operazione la Società emette regolare documentazione fiscale ai sensi di legge. Qualora il Cliente sia un soggetto d'impresa o un professionista e ne faccia richiesta contestualmente all'accordo, fornendo P.IVA e Codice Univoco/PEC destinatario, la Società emetterà <strong>fattura elettronica</strong> ai sensi del D.P.R. 633/1972.</p>
+
+  <h2><span class="num">13</span>Privacy e trattamento dei dati personali</h2>
+  <p>I dati personali forniti dal Cliente sono trattati da GEFF GROUP S.R.L.S. in qualità di Titolare del trattamento, ai sensi del Reg. UE 2016/679 (GDPR) e del D.Lgs. 196/2003 e s.m.i., esclusivamente per le finalità connesse all'esecuzione del rapporto, agli obblighi di legge e, previo consenso, per essere ricontattato.</p>
+  <p>Per informazioni complete si rimanda all'<a href="privacy.html" target="_blank" rel="noopener">Informativa Privacy</a> disponibile sul sito.</p>
+
+  <h2><span class="num">14</span>Proprietà intellettuale</h2>
+  <p>Tutti i contenuti presenti sul sito geffgroup.it — inclusi testi, immagini, loghi, grafiche e codice — sono di proprietà esclusiva di GEFF GROUP S.R.L.S. o concessi in licenza alla stessa, e sono tutelati dalla normativa in materia di diritto d'autore e proprietà intellettuale (L. 633/1941 e s.m.i.). È vietata qualsiasi riproduzione, distribuzione, modifica o utilizzo non autorizzato.</p>
+
+  <h2><span class="num">15</span>Disposizioni finali</h2>
+  <h3>Comunicazioni tra le parti</h3>
+  <p>Tutte le comunicazioni avvengono preferibilmente via e-mail a <a href="mailto:info@geffgroup.it">info@geffgroup.it</a> o PEC a <a href="mailto:geffgroup@pec.it">geffgroup@pec.it</a>. Per le comunicazioni aventi valore legale (es. recesso, contestazioni formali) è consigliato l'utilizzo della PEC o di raccomandata A/R.</p>
+  <h3>Nullità parziale</h3>
+  <p>L'eventuale invalidità o inefficacia di una o più clausole delle presenti Condizioni non determina l'invalidità dell'intero contratto. Le clausole nulle o inefficaci saranno sostituite, nei limiti del possibile, da disposizioni valide che si avvicinino quanto più possibile all'intento delle clausole sostituite.</p>
+
+  <h2><span class="num">16</span>Legge applicabile e foro competente</h2>
+  <p>Le presenti Condizioni sono disciplinate dalla legge italiana. Per i Clienti consumatori si applicano le disposizioni inderogabili del D.Lgs. 206/2005 e del diritto dell'Unione Europea a tutela del consumatore.</p>
+  <ul>
+    <li>se il Cliente è un <strong>consumatore</strong>, è competente il tribunale del luogo di residenza o domicilio eletto del consumatore in Italia;</li>
+    <li>se il Cliente è un <strong>operatore professionale</strong>, è esclusivamente competente il Foro di Udine.</li>
+  </ul>
+
+  <h2><span class="num">17</span>Risoluzione alternativa delle controversie (ODR)</h2>
+  <p>Ai sensi del Regolamento UE 524/2013, i consumatori residenti nell'Unione Europea hanno la facoltà di ricorrere alla Piattaforma europea per la risoluzione online delle controversie (ODR) per risolvere in via extragiudiziale eventuali controversie relative a contratti conclusi online:</p>
+  <p><a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+  <p>L'indirizzo e-mail del Venditore per le comunicazioni relative alle controversie ODR è: <a href="mailto:info@geffgroup.it">info@geffgroup.it</a>.</p>
+
+  <h2><span class="num">18</span>Modifiche alle condizioni</h2>
+  <p>La Società si riserva il diritto di modificare le presenti Condizioni in qualsiasi momento. Le modifiche saranno pubblicate sul sito con indicazione della data di aggiornamento. Le Condizioni applicabili a ciascun rapporto sono quelle in vigore alla data di conclusione del contratto.</p>
+
+  <h2>Appendice A — Modulo di recesso standard</h2>
+  <p style="font-size:13px;color:var(--testo-faint);margin-bottom:16px">(Compilare e restituire il presente modulo solo se si desidera recedere dal contratto)</p>
+  <div class="form-box">
+    <p><strong>A:</strong> GEFF GROUP S.R.L.S., Vicolo Gorgo 5, 33100 Udine (UD)<br>
+    E-mail: info@geffgroup.it — PEC: geffgroup@pec.it</p>
+    <p>Con la presente io/noi (*) notifichiamo il recesso dal mio/nostro (*) contratto relativo ai seguenti beni/servizi (*):</p>
+    <p>________________________________________________________________________</p>
+    <p>Ordinati il (*): _________________________ / Ricevuti il (*): _________________________</p>
+    <p>Nome del/dei consumatore/i: _________________________________________________</p>
+    <p>Indirizzo del/dei consumatore/i: _______________________________________________</p>
+    <p>Firma del/dei consumatore/i (solo se notificato in versione cartacea): _______________</p>
+    <p>Data: _________________________</p>
+    <p style="margin-top:12px;font-size:12px;color:var(--testo-faint)">(*) Cancellare la voce inutile. Modulo ai sensi dell'Allegato I, Parte B del D.Lgs. 206/2005.</p>
+  </div>
+</main>
+
+<footer>
+  © 2026 GEFF GROUP S.R.L.S. · P.IVA 03146260306 ·
+  <a href="privacy.html">Privacy Policy</a> ·
+  <a href="cookie-policy.html">Cookie Policy</a> ·
+  <a href="condizioni-di-vendita.html">Condizioni di Vendita</a>
+</footer>
+
+</body>
+</html>
