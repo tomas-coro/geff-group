@@ -468,7 +468,7 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   background:var(--carbone);border:1px solid var(--linea);border-radius:var(--bordo-r);
   max-width:540px;width:100%;
   max-height:calc(100dvh - 40px);overflow-y:auto;
-  padding:clamp(24px,4vw,40px);position:relative;
+  padding:clamp(22px,3vw,32px);position:relative;
   animation:modal-in .3s var(--ease);
 }
 @keyframes modal-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -480,17 +480,17 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   color:var(--testo-faint);font-size:20px;line-height:1;cursor:pointer;transition:color .2s,border-color .2s;
 }
 .modal-close:hover{color:var(--testo);border-color:var(--linea)}
-.modal-eyebrow{margin-bottom:14px}
+.modal-eyebrow{margin-bottom:10px}
 .modal-title{
   font-family:"Sora",sans-serif;font-weight:800;
   font-size:clamp(22px,3vw,30px);color:var(--testo);line-height:1.08;
-  margin-bottom:8px;letter-spacing:-.01em;
+  margin-bottom:6px;letter-spacing:-.01em;
 }
-.modal-sub{color:var(--testo-soft);font-size:14.5px;line-height:1.55;margin-bottom:22px}
+.modal-sub{color:var(--testo-soft);font-size:14.5px;line-height:1.5;margin-bottom:15px}
 
 /* ---- FORM -------------------------------------------------------------- */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-group{margin-bottom:16px}
+.form-group{margin-bottom:12px}
 .form-label{
   font-family:"Sora",sans-serif;font-size:11px;font-weight:700;
   letter-spacing:.14em;text-transform:uppercase;color:var(--sartoria-soft);
@@ -500,18 +500,18 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 .form-input,.form-textarea{
   width:100%;background:var(--inchiostro);
   border:1px solid var(--linea);border-radius:var(--bordo-r);
-  color:var(--testo);padding:12px 14px;
+  color:var(--testo);padding:11px 14px;
   font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:15px;
   transition:border-color .2s;outline:none;
 }
 .form-input::placeholder,.form-textarea::placeholder{color:var(--testo-faint)}
 .form-input:focus,.form-textarea:focus{border-color:color-mix(in srgb,var(--sartoria) 60%,transparent)}
-.form-textarea{resize:vertical;min-height:110px}
+.form-textarea{resize:vertical;min-height:84px}
 
 .form-consent{
   display:flex;align-items:flex-start;gap:11px;
-  font-size:13px;line-height:1.55;color:var(--testo-soft);
-  margin:4px 0 6px;cursor:pointer;
+  font-size:13px;line-height:1.5;color:var(--testo-soft);
+  margin:2px 0 2px;cursor:pointer;
 }
 .form-consent input[type=checkbox]{
   appearance:none;-webkit-appearance:none;
@@ -529,7 +529,7 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 .form-consent .req{color:var(--sartoria-soft)}
 
 .form-submit{
-  width:100%;margin-top:18px;min-height:48px;
+  width:100%;margin-top:14px;min-height:48px;
   font-family:"Sora",sans-serif;font-weight:700;font-size:15px;
   letter-spacing:.02em;color:var(--inchiostro);background:var(--sartoria);
   border:none;border-radius:var(--bordo-r);padding:14px;cursor:pointer;
@@ -672,7 +672,21 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 }
 
 @media(max-width:480px){
-  .form-row{grid-template-columns:1fr;gap:0}
+  /* CONTATTO: compatta la modale così sta in una schermata senza scroll */
+  .modal-backdrop{padding:12px}
+  .modal{padding:22px 20px 24px;max-height:calc(100dvh - 24px)}
+  .modal-eyebrow{margin-bottom:9px}
+  .modal-title{font-size:21px;margin-bottom:5px}
+  .modal-sub{font-size:13px;line-height:1.45;margin-bottom:14px}
+  .form-row{grid-template-columns:1fr 1fr;gap:10px}   /* Nome e Cognome affiancati */
+  .form-group{margin-bottom:10px}
+  .form-label{margin-bottom:5px}
+  .form-input,.form-textarea{padding:10px 13px}
+  .form-textarea{min-height:70px}
+  .form-consent{font-size:12.5px;margin:2px 0}
+  .form-submit{margin-top:12px;min-height:46px;padding:12px}
+  .form-status{margin-top:8px}
+
   .hero-ctas .btn-cta,.hero-ctas .btn-ghost{flex:1 1 100%;justify-content:center}
   .cb-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
   .cb-actions .cb-accept{grid-column:1 / -1}
