@@ -254,11 +254,13 @@ input:focus-visible,textarea:focus-visible,
 
 /* ---- LE 3 ROTTE (cuore visivo, versione scrollabile) ------------------ */
 .routes{display:grid;gap:14px}
+/* Ogni rotta = una "tavola" da disegno tecnico: a sinistra il disegno
+   (scafo / cartamodello / profilo auto con quote), a destra il testo.
+   Resta un link alla pagina di servizio; mantiene il colore-zona. */
 .route{
   position:relative;overflow:hidden;isolation:isolate;
-  display:grid;grid-template-columns:auto 1fr auto;
-  align-items:center;gap:clamp(16px,3vw,32px);
-  padding:clamp(22px,3vw,32px) clamp(20px,3vw,34px);
+  display:grid;grid-template-columns:minmax(0,300px) 1fr;
+  align-items:stretch;gap:0;
   background:var(--carbone);
   border:1px solid var(--linea);border-radius:var(--bordo-r);
   color:inherit;
@@ -273,7 +275,7 @@ input:focus-visible,textarea:focus-visible,
 /* barra di colore-zona a sinistra, come segnaletica */
 .route::after{
   content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--zona);
+  background:var(--zona);z-index:1;
 }
 .route[data-zona="mare"]{--zona:var(--mare);--zona-soft:var(--mare-soft);--zona-glow:rgba(47,158,134,.32)}
 .route[data-zona="sartoria"]{--zona:var(--sartoria);--zona-soft:var(--sartoria-soft);--zona-glow:rgba(47,111,158,.30)}
@@ -282,42 +284,102 @@ input:focus-visible,textarea:focus-visible,
 .route:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--zona) 55%, var(--linea))}
 .route:hover::before{opacity:.9}
 
+/* Le "altre rotte" delle pagine di servizio sono link SENZA disegno:
+   restano schede pulite a colonna unica (niente colonna-disegno vuota).
+   Lì l'indice è figlio diretto di .route (riga 1 della griglia): gli do
+   la stessa spaziatura del corpo e avvicino il testo. */
+.route:not(:has(.route-draw)){grid-template-columns:1fr}
+.route:not(:has(.route-draw)) .route-index{
+  padding:clamp(22px,3vw,30px) clamp(20px,3vw,34px) 0;
+}
+.route:not(:has(.route-draw)) .route-body{justify-content:flex-start;padding-top:6px}
+
+/* ---- pannello disegno (cianografia leggera, coerente col carbone) ---- */
+.route-draw{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,3vw,30px);
+  background:
+    repeating-linear-gradient(0deg,transparent 0 15px,var(--linea-soft) 15px 16px),
+    repeating-linear-gradient(90deg,transparent 0 15px,var(--linea-soft) 15px 16px),
+    var(--carbone-2);
+  border-right:1px dashed var(--linea);
+}
+/* angoli a mirino, come su un disegno tecnico */
+.route-draw::before,.route-draw::after{
+  content:"";position:absolute;width:10px;height:10px;
+  border:1px solid color-mix(in srgb,var(--zona) 55%,var(--linea));opacity:.7;
+}
+.route-draw::before{top:9px;left:9px;border-right:none;border-bottom:none}
+.route-draw::after{bottom:9px;right:9px;border-left:none;border-top:none}
+.route-draw svg{width:100%;height:auto;max-height:150px;display:block}
+/* tratti del disegno: linea principale = colore-zona soft, quota = colore-zona */
+.route .ln{fill:none;stroke:var(--zona-soft);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.route .ln.thin{stroke-width:1;opacity:.6}
+.route .dim{fill:none;stroke:var(--testo-faint);stroke-width:.8}
+.route .dimb{fill:none;stroke:var(--zona);stroke-width:1.2}
+.route .qt{font-family:"Sora",sans-serif;font-size:8px;fill:var(--testo-faint);letter-spacing:.04em}
+.route .qtb{fill:var(--zona-soft)}
+
+.route-body{
+  position:relative;min-width:0;
+  padding:clamp(22px,3vw,32px) clamp(20px,3vw,34px);
+  display:flex;flex-direction:column;justify-content:center;
+}
 .route-index{
   font-family:"Sora",sans-serif;
-  font-weight:700;font-size:clamp(13px,1.3vw,15px);
-  letter-spacing:.16em;color:var(--zona-soft);
-  writing-mode:vertical-rl;transform:rotate(180deg);
-  align-self:stretch;display:flex;align-items:center;
+  font-weight:700;font-size:12px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--zona-soft);
+  margin-bottom:10px;
 }
-.route-body{min-width:0}
 .route-kicker{
   font-family:"Sora",sans-serif;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--zona-soft);display:block;margin-bottom:8px;
+  color:var(--zona-soft);display:block;margin-bottom:8px;opacity:.85;
 }
 .route-title{
   font-family:"Sora",sans-serif;
-  font-weight:800;font-size:clamp(24px,3.2vw,38px);
-  line-height:1;color:var(--testo);margin-bottom:10px;letter-spacing:-.01em;
+  font-weight:800;font-size:clamp(22px,3vw,34px);
+  line-height:1.02;color:var(--testo);margin-bottom:10px;letter-spacing:-.01em;
 }
 .route-desc{font-size:14.5px;line-height:1.55;color:var(--testo-soft);max-width:54ch}
 .route-tags{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
 .route-tags li{
-  font-size:12px;color:var(--testo-soft);
+  font-family:"Sora",sans-serif;font-size:11px;letter-spacing:.04em;
+  color:var(--testo-soft);
   border:1px solid var(--linea);border-radius:var(--bordo-r);
   padding:5px 9px;background:rgba(255,255,255,.02);
 }
 .route-go{
-  width:44px;height:44px;flex:0 0 auto;
+  position:absolute;top:14px;right:14px;z-index:2;
+  width:40px;height:40px;flex:0 0 auto;
   border:1px solid var(--linea);border-radius:50%;
   display:grid;place-items:center;color:var(--testo-soft);
+  background:color-mix(in srgb,var(--carbone) 70%,transparent);
   transition:transform .4s var(--ease),border-color .35s,color .35s,background .35s;
 }
-.route-go svg{width:17px;height:17px}
+.route-go svg{width:16px;height:16px}
 .route:hover .route-go{
   background:var(--zona);border-color:var(--zona);color:var(--inchiostro);
   transform:rotate(45deg);
 }
+
+/* movimento: il disegno si "traccia" quando la rotta entra nello scroll.
+   Lo stato "non tracciato" si attiva SOLO quando il reveal è realmente in
+   gioco (.rv-pre lo aggiunge main.js solo se IntersectionObserver c'è e
+   l'utente non ha chiesto meno animazioni): così senza JS/reduced-motion
+   i disegni restano visibili. */
+@media (prefers-reduced-motion:no-preference){
+  .route.rv-pre .ln,.route.rv-pre .dim,.route.rv-pre .dimb{
+    stroke-dasharray:1400;stroke-dashoffset:1400;
+  }
+  .route.in .ln,.route.in .dim,.route.in .dimb{
+    animation:routeDraw 1.3s var(--ease) forwards;
+  }
+  .route.in .dimb{animation-delay:.25s}
+  .route:hover .dimb{stroke-width:1.7}
+}
+@keyframes routeDraw{to{stroke-dashoffset:0}}
 
 /* ---- BLOCCO "CUORE DI FAMIGLIA" --------------------------------------- */
 .family{
@@ -659,7 +721,9 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   .header-actions .btn-cta .lbl-long{display:none}
   .header-actions .btn-cta .lbl-short{display:inline}
 
-  .route{grid-template-columns:auto 1fr;gap:16px}
+  .route{grid-template-columns:1fr}    /* disegno sopra, testo sotto */
+  .route-draw{border-right:none;border-bottom:1px dashed var(--linea)}
+  .route-draw svg{max-height:120px}
   .route-go{display:none}              /* su mobile l'intero blocco è il link */
   .route::after{width:4px}
 
@@ -718,6 +782,56 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 
 /* su queste pagine l'ago nord della bussola segue la zona */
 [data-zona] .hero-compass .needle-n{fill:var(--zona)}
+
+/* HERO "TAVOLA" delle pagine servizio (apertura blueprint, modo C):
+   la tavola tecnica della sezione si disegna al caricamento e RESTA come
+   intestazione. Stessa grammatica della home (testo + segno a fianco), ma
+   qui il segno è il disegno tecnico del servizio (scafo / cartamodello /
+   profilo auto). Prende il colore-zona da [data-zona] sul <main>.
+   Tracciatura solo-CSS: l'hero è sempre visibile al load, niente JS. */
+.hero-draw{
+  position:relative;align-self:stretch;
+  min-height:clamp(210px,30vh,310px);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,3vw,34px);
+  background:
+    repeating-linear-gradient(0deg,transparent 0 16px,var(--linea-soft) 16px 17px),
+    repeating-linear-gradient(90deg,transparent 0 16px,var(--linea-soft) 16px 17px),
+    var(--carbone-2);
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+}
+/* mirini d'angolo, come su un disegno tecnico */
+.hero-draw::before,.hero-draw::after{
+  content:"";position:absolute;width:13px;height:13px;
+  border:1px solid color-mix(in srgb,var(--zona,var(--sartoria)) 55%,var(--linea));opacity:.7;
+}
+.hero-draw::before{top:11px;left:11px;border-right:none;border-bottom:none}
+.hero-draw::after{bottom:11px;right:11px;border-left:none;border-top:none}
+.hero-draw .tav{
+  position:absolute;top:12px;right:14px;font-family:"Sora",sans-serif;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--testo-faint);
+}
+.hero-draw svg{width:100%;max-width:480px;height:auto;display:block;overflow:visible}
+.hero-draw .ln{fill:none;stroke:var(--zona-soft);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.hero-draw .ln.thin{stroke-width:1;opacity:.6}
+.hero-draw .dim{fill:none;stroke:var(--testo-faint);stroke-width:.8}
+.hero-draw .dimb{fill:none;stroke:var(--zona);stroke-width:1.2}
+.hero-draw .qt{font-family:"Sora",sans-serif;font-size:8px;fill:var(--testo-faint);letter-spacing:.04em}
+.hero-draw .qtb{fill:var(--zona-soft)}
+/* la tavola si traccia una volta al load (i path hanno pathLength="1") */
+@media(prefers-reduced-motion:no-preference){
+  .hero-draw .ln,.hero-draw .dim,.hero-draw .dimb{
+    stroke-dasharray:1;stroke-dashoffset:1;
+    animation:heroDraw 1s var(--ease) var(--hd,0s) forwards;
+  }
+  .hero-draw .qt{opacity:0;animation:heroQt .5s ease 1.1s forwards}
+}
+@keyframes heroDraw{to{stroke-dashoffset:0}}
+@keyframes heroQt{to{opacity:1}}
+@media(max-width:760px){
+  .hero-draw{min-height:0}
+  .hero-draw svg{max-height:160px}
+}
 
 /* PROCESSO A TAPPE — "come lavoriamo" */
 .steps{display:grid;gap:14px;counter-reset:step}

@@ -62,21 +62,42 @@
 
 <main id="main" data-zona="strada">
 
-  <!-- HERO -->
+  <!-- HERO — il profilo dell'auto si disegna al load e resta come intestazione (modo C) -->
   <section class="hero">
     <div class="container">
-      <p class="eyebrow zona hero-eyebrow rv">03 · Strada · Permuta e vendita</p>
-      <h1 class="hero-title rv rv-d1">Dalle onde all'asfalto.<em>Le auto dei nostri armatori.</em></h1>
-      <p class="hero-lead rv rv-d2">Vendendo barche ci siamo accorti di una cosa: spesso chi sale a bordo ha in garage un'auto da cambiare. Così è nato il Garage GEFF. La ritiriamo in permuta o te la compriamo, e la rivendiamo a chi cerca un usato di cui fidarsi — selezionata all'origine, da una clientela che conosciamo. La firma e la faccia anche su quattro ruote.</p>
-      <div class="hero-ctas rv rv-d3">
-        <button class="btn-cta" type="button" data-open-modal="modal-contatto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 6 9-6"/></svg>
-          Scrivici una mail
-        </button>
-        <a class="btn-ghost" href="#due-strade">
-          Vendi o compra
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-        </a>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow zona hero-eyebrow rv">03 · Strada · Permuta e vendita</p>
+          <h1 class="hero-title rv rv-d1">Dalle onde all'asfalto.<em>Le auto dei nostri armatori.</em></h1>
+          <p class="hero-lead rv rv-d2">Vendendo barche ci siamo accorti di una cosa: spesso chi sale a bordo ha in garage un'auto da cambiare. Così è nato il Garage GEFF. La ritiriamo in permuta o te la compriamo, e la rivendiamo a chi cerca un usato di cui fidarsi — selezionata all'origine, da una clientela che conosciamo. La firma e la faccia anche su quattro ruote.</p>
+          <div class="hero-ctas rv rv-d3">
+            <button class="btn-cta" type="button" data-open-modal="modal-contatto">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 6 9-6"/></svg>
+              Scrivici una mail
+            </button>
+            <a class="btn-ghost" href="#due-strade">
+              Vendi o compra
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- tavola tecnica: profilo di auto con quota del passo, si traccia al caricamento -->
+        <div class="hero-draw" aria-hidden="true">
+          <span class="tav">Tav. 03 · Strada</span>
+          <svg viewBox="0 0 260 150" role="img" aria-label="Profilo di auto con quote">
+            <path class="ln" pathLength="1" style="--hd:.05s" d="M24 96 L40 96 C44 80 58 70 80 68 L120 66 C140 52 168 50 188 64 L214 68 C228 70 236 80 238 96 L246 96"/>
+            <circle class="ln" pathLength="1" style="--hd:.3s" cx="74" cy="100" r="16"/>
+            <circle class="ln" pathLength="1" style="--hd:.38s" cx="196" cy="100" r="16"/>
+            <path class="ln thin" pathLength="1" style="--hd:.5s" d="M86 68 L120 66 L150 56 L182 58"/>
+            <circle class="ln thin" pathLength="1" style="--hd:.56s" cx="74" cy="100" r="7"/>
+            <circle class="ln thin" pathLength="1" style="--hd:.6s" cx="196" cy="100" r="7"/>
+            <path class="ln thin" pathLength="1" style="--hd:.66s" d="M16 116 L250 116"/>
+            <path class="dimb" pathLength="1" style="--hd:.78s" d="M74 132 L196 132"/>
+            <path class="dimb" pathLength="1" style="--hd:.84s" d="M74 127 L74 137 M196 127 L196 137"/>
+            <text class="qt qtb" x="135" y="128" text-anchor="middle">passo 2,70 m</text>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
