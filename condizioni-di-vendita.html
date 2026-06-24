@@ -15,88 +15,63 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-  :root{
-    --carbone-2:#0e1217;--inchiostro:#0a0d11;
-    --testo:#eceef1;--testo-soft:rgba(236,238,241,.66);--testo-faint:rgba(236,238,241,.42);
-    --linea:rgba(236,238,241,.12);--sartoria:#2f6f9e;--sartoria-soft:#4f93c4;--bordo-r:2px;
+  .legal-doc{
+    max-width:800px;margin:0 auto;
+    padding:clamp(40px,8vh,72px) clamp(20px,5vw,52px) clamp(60px,8vh,100px);
+    font-size:16px;line-height:1.75;color:var(--testo-soft);
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:80px}
-  body{
-    background:var(--inchiostro);color:var(--testo-soft);
-    font-family:"Hanken Grotesk",system-ui,sans-serif;
-    font-size:16px;line-height:1.75;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  .legal-doc a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+  .legal-doc a:hover{color:var(--testo)}
+  .legal-doc .eyebrow{margin-bottom:14px}
+  .legal-doc .draft-flag{
+    border:1px dashed color-mix(in srgb,var(--sartoria) 50%,transparent);border-radius:var(--bordo-r);
+    background:rgba(47,111,158,.07);color:var(--sartoria-soft);
+    padding:12px 16px;font-size:13px;line-height:1.5;margin-bottom:28px;
   }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    padding:clamp(14px,2.5vw,20px) clamp(20px,5vw,52px);
-    display:flex;align-items:center;justify-content:space-between;gap:16px;
-    background:linear-gradient(to bottom,rgba(11,14,18,.92) 0%,transparent 100%);
-  }
-  .nav-logo{display:flex;align-items:center;gap:10px;color:var(--testo)}
-  .nav-logo svg{width:26px;height:26px}
-  .nav-logo .name{font-family:"Sora",sans-serif;font-weight:800;font-size:16px;letter-spacing:.02em}
-  .nav-logo .name span{color:var(--testo-soft);font-weight:600}
-  .nav-back{color:var(--sartoria-soft);font-family:"Sora",sans-serif;
-    font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:color .2s}
-  .nav-back::before{content:"\2190  ";opacity:.7}
-  .nav-back:hover{color:var(--testo)}
-  main{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:clamp(104px,15vh,150px) clamp(20px,5vw,52px) clamp(60px,8vh,100px)}
-  a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:3px;transition:color .2s}
-  a:hover{color:var(--testo)}
-  .draft-flag{border:1px dashed color-mix(in srgb,var(--sartoria) 50%,transparent);border-radius:var(--bordo-r);
-    background:rgba(47,111,158,.07);color:var(--sartoria-soft);padding:12px 16px;font-size:13px;line-height:1.5;margin-bottom:28px}
-  .eyebrow{font-family:"Sora",sans-serif;font-size:12px;font-weight:700;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--testo-faint);
-    display:inline-flex;align-items:center;gap:12px;margin-bottom:14px}
-  .eyebrow::before{content:"";width:24px;height:1px;background:var(--sartoria)}
-  h1{font-family:"Sora",sans-serif;font-weight:800;color:var(--testo);
+  .legal-doc h1{font-family:"Sora",sans-serif;font-weight:800;color:var(--testo);
     letter-spacing:-.01em;line-height:1.05;font-size:clamp(30px,5vw,50px);margin-bottom:20px}
-  .lead{font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(17px,2vw,21px);color:var(--sartoria-soft);
+  .legal-doc .lead{font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(17px,2vw,21px);color:var(--sartoria-soft);
     line-height:1.4;margin-bottom:clamp(28px,4vh,40px)}
-  .last-update{font-size:12px;letter-spacing:.1em;color:var(--testo-faint);text-transform:uppercase;
+  .legal-doc .last-update{font-size:12px;letter-spacing:.1em;color:var(--testo-faint);text-transform:uppercase;
     margin-bottom:clamp(36px,5vh,56px);padding-bottom:clamp(24px,4vh,36px);border-bottom:1px solid var(--linea)}
-  h2{font-family:"Sora",sans-serif;font-weight:700;color:var(--testo);
+  .legal-doc h2{font-family:"Sora",sans-serif;font-weight:700;color:var(--testo);
     letter-spacing:-.005em;line-height:1.2;font-size:clamp(18px,2.4vw,24px);
     margin:clamp(36px,6vh,52px) 0 16px;padding-bottom:10px;border-bottom:1px solid var(--linea);
     display:flex;align-items:baseline;gap:14px}
-  h2 .num{color:var(--sartoria-soft);font-size:.78em;font-weight:700}
-  h3{font-family:"Sora",sans-serif;font-weight:700;color:var(--testo);
+  .legal-doc h2 .num{color:var(--sartoria-soft);font-size:.78em;font-weight:700}
+  .legal-doc h3{font-family:"Sora",sans-serif;font-weight:700;color:var(--testo);
     letter-spacing:.04em;font-size:clamp(13px,1.4vw,15px);text-transform:uppercase;margin:24px 0 10px}
-  p{margin-bottom:14px}
-  ul,ol{padding-left:22px;margin-bottom:14px}
-  li{margin-bottom:6px}
-  li::marker{color:var(--sartoria)}
-  strong{color:var(--testo);font-weight:600}
-  .highlight-box{border:1px solid color-mix(in srgb,var(--sartoria) 18%,transparent);border-radius:var(--bordo-r);
+  .legal-doc p{margin-bottom:14px}
+  .legal-doc ul,.legal-doc ol{padding-left:22px;margin-bottom:14px}
+  .legal-doc li{margin-bottom:6px}
+  .legal-doc li::marker{color:var(--sartoria)}
+  .legal-doc strong{color:var(--testo);font-weight:600}
+  .legal-doc .highlight-box{border:1px solid color-mix(in srgb,var(--sartoria) 18%,transparent);border-radius:var(--bordo-r);
     padding:20px 24px;margin:24px 0;background:rgba(47,111,158,.05)}
-  .highlight-box p{margin-bottom:0}
-  .form-box{border:1px solid var(--linea);border-radius:var(--bordo-r);padding:20px 24px;margin:24px 0;
+  .legal-doc .highlight-box p{margin-bottom:0}
+  .legal-doc .form-box{border:1px solid var(--linea);border-radius:var(--bordo-r);padding:20px 24px;margin:24px 0;
     background:rgba(255,255,255,.015);font-size:13.5px;line-height:1.9;color:var(--testo-soft)}
-  .form-box strong{color:var(--testo)}
-  footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:clamp(28px,4vh,40px) clamp(20px,5vw,52px);
-    text-align:center;font-size:12px;letter-spacing:.06em;color:var(--testo-faint)}
-  footer a{color:var(--testo-faint);text-decoration:none}
-  footer a:hover{color:var(--sartoria-soft)}
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .legal-doc .form-box strong{color:var(--testo)}
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html" aria-label="GEFF Group — Home">
-    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><path d="M16 5 L20 16 L16 27 L12 16 Z" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.6" fill="#0e1217" stroke="none"/></svg>
-    <span class="name">GEFF <span>GROUP</span></span>
-  </a>
-  <a class="nav-back" href="index.html">Torna al sito</a>
-</nav>
+<!-- HEADER — isola "Plancia" ridotta per le pagine legali (brand + torna al sito), zero JS -->
+<header class="site-header is-slim">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="GEFF Group — Home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><g class="needle"><path d="M16 5 L20 16 L16 27 L12 16 Z" fill="currentColor" stroke="none"/></g><circle cx="16" cy="16" r="1.6" fill="#0f1318" stroke="none"/></svg>
+      </span>
+      <span class="name">GEFF <span>GROUP</span></span>
+    </a>
+    <a class="nav-back" href="index.html">Torna al sito</a>
+  </div>
+</header>
 
-<main>
+<main class="legal-doc">
   <p class="draft-flag">Bozza legale — testi adattati da un sito precedente (un e-commerce) e riformulati per il contesto di GEFF Group, che opera su consulenza e compravendita e non vende online. <strong>Da far validare al titolare e a un consulente legale</strong> prima della pubblicazione.</p>
   <div class="eyebrow">Documento legale</div>
   <h1>Condizioni Generali</h1>
@@ -224,11 +199,58 @@
   </div>
 </main>
 
-<footer>
-  © 2026 GEFF GROUP S.R.L.S. · P.IVA 03146260306 ·
-  <a href="privacy.html">Privacy Policy</a> ·
-  <a href="cookie-policy.html">Cookie Policy</a> ·
-  <a href="condizioni-di-vendita.html">Condizioni di Vendita</a>
+<!-- FOOTER condiviso + watermark GEFF -->
+<footer class="site-footer">
+  <div class="footer-watermark" aria-hidden="true"><span>G</span><span>E</span><span>F</span><span>F</span></div>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="GEFF Group — Home">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><path d="M16 5 L20 16 L16 27 L12 16 Z" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.6" fill="#0f1318" stroke="none"/></svg>
+          </span>
+          <span class="name">GEFF <span>GROUP</span></span>
+        </a>
+        <p class="footer-claim">La firma e la faccia su ogni cosa.</p>
+        <p>Bottega di famiglia a Udine: natanti, sartoria nautica su misura e auto usate. Solo per privati.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Le rotte</h4>
+        <ul>
+          <li><a href="natanti.html">Vendita natanti</a></li>
+          <li><a href="accessori-barche.html">Accessori barche</a></li>
+          <li><a href="auto-usate.html">Auto usate</a></li>
+          <li><a href="chi-siamo.html">Chi siamo</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contatti &amp; legale</h4>
+        <ul>
+          <li><a href="mailto:info@geffgroup.it">info@geffgroup.it</a></li>
+          <li><a href="tel:+393451700315">+39 345 170 0315</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="condizioni-di-vendita.html">Condizioni di Vendita</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <span><b>GEFF GROUP S.R.L.S.</b></span>
+      <span class="sep">·</span>
+      <span>Vicolo Gorgo 5, 33100 Udine (UD)</span>
+      <span class="sep">·</span>
+      <span>P.IVA <b>03146260306</b></span>
+      <span class="sep">·</span>
+      <span>REA <b>372874</b></span>
+      <span class="sep">·</span>
+      <span>PEC <b>geffgroup@pec.it</b></span>
+    </div>
+    <p class="footer-copy">© 2026 GEFF GROUP S.R.L.S. · Tutti i diritti riservati</p>
+  </div>
 </footer>
 
 </body>

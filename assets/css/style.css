@@ -190,6 +190,15 @@ body{padding-top:88px}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
+/* Header ridotto delle pagine legali: solo brand + "Torna al sito" (.site-header.is-slim) */
+.nav-back{
+  color:var(--sartoria-soft);font-family:"Sora",sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;transition:color .2s;
+}
+.nav-back::before{content:"\2190  ";opacity:.7}
+.nav-back:hover{color:var(--testo)}
+
 /* ---- HERO -------------------------------------------------------------- */
 .hero{
   position:relative;overflow:hidden;
