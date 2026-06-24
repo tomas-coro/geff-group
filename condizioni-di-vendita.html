@@ -253,5 +253,49 @@
   </div>
 </footer>
 
+<!-- ===== COOKIE BANNER ===== -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-labelledby="cb-title" aria-describedby="cb-desc">
+  <button class="cb-close" type="button" data-consent="deny" aria-label="Chiudi e rifiuta i cookie non necessari">&times;</button>
+  <div class="cb-inner">
+    <div class="cb-text">
+      <strong id="cb-title">Informativa cookie</strong>
+      <p id="cb-desc">Usiamo solo cookie tecnici necessari al funzionamento del sito. Eventuali statistiche anonime verranno attivate solo con il tuo consenso. <a href="cookie-policy.html">Maggiori informazioni</a></p>
+    </div>
+    <div class="cb-actions">
+      <button class="cb-btn cb-deny" type="button" data-consent="deny">Rifiuta</button>
+      <button class="cb-btn cb-custom" type="button" data-action="prefs" aria-expanded="false" aria-controls="cb-prefs">Personalizza</button>
+      <button class="cb-btn cb-accept" type="button" data-consent="accept">Accetta tutti</button>
+    </div>
+  </div>
+
+  <div class="cb-prefs" id="cb-prefs" hidden>
+    <div class="cb-pref-row">
+      <div class="cb-pref-info">
+        <strong>Cookie necessari</strong>
+        <p>Indispensabili per il funzionamento del sito e per ricordare le tue scelte. Sempre attivi.</p>
+      </div>
+      <label class="cb-switch">
+        <input type="checkbox" checked disabled aria-label="Cookie necessari (sempre attivi)">
+        <span class="cb-slider"></span>
+      </label>
+    </div>
+    <div class="cb-pref-row">
+      <div class="cb-pref-info">
+        <strong>Statistiche anonime</strong>
+        <p>Misurazione aggregata e anonima delle visite, senza profilazione. Al momento non è collegato alcuno strumento: questa scelta vale per quando lo sarà.</p>
+      </div>
+      <label class="cb-switch">
+        <input type="checkbox" id="cb-analytics" aria-label="Statistiche anonime">
+        <span class="cb-slider"></span>
+      </label>
+    </div>
+    <div class="cb-prefs-actions">
+      <button class="cb-btn cb-deny" type="button" data-consent="deny">Rifiuta tutti</button>
+      <button class="cb-btn cb-accept" type="button" data-action="save">Salva preferenze</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
