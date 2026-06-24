@@ -510,7 +510,7 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   padding-inline:clamp(10px,3vw,40px);
   font-family:"Sora",sans-serif;font-weight:800;line-height:.62;
   font-size:clamp(110px,26vw,380px);
-  color:rgba(236,238,241,.055);
+  color:rgba(236,238,241,.04);
   pointer-events:none;user-select:none;white-space:nowrap;
 }
 .footer-watermark span{display:block}
