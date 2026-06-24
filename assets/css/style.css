@@ -1055,3 +1055,51 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   color:var(--testo-faint);margin-top:5px;
 }
 @media(max-width:560px){.acronimo{grid-template-columns:repeat(2,1fr)}}
+
+/* =========================================================================
+   FOOTER MOBILE — "Targa" (gemella della nav)
+   Su <=760px il .footer-top diventa una targa incorniciata con le stesse
+   tacche ad angolo dell'header: marchio centrato in cima e le due liste
+   ("Le rotte" / "Contatti & legale") affiancate, per non sprecare spazio.
+   Desktop invariato: qui tocchiamo solo il mobile.
+   ========================================================================= */
+@media(max-width:760px){
+  .footer-top{
+    grid-template-columns:1fr 1fr;            /* le due liste affiancate */
+    gap:24px 18px;
+    position:relative;
+    margin-top:6px;
+    padding:26px 16px 20px;                    /* override del padding-block ampio */
+    border:1px solid var(--linea);
+    border-radius:var(--bordo-r);
+    background:linear-gradient(180deg,rgba(255,255,255,.018),transparent);
+  }
+  /* tacche ad angolo: lo stesso stilema della .site-header -> il footer "lega" */
+  .footer-top::before,
+  .footer-top::after{
+    content:"";position:absolute;width:14px;height:14px;
+    border:1px solid color-mix(in srgb,var(--sartoria) 60%,var(--linea));
+    opacity:.7;pointer-events:none;
+  }
+  .footer-top::before{top:6px;left:6px;border-right:none;border-bottom:none}
+  .footer-top::after{bottom:6px;right:6px;border-left:none;border-top:none}
+
+  /* marchio centrato, a tutta larghezza sopra le due colonne */
+  .footer-brand{
+    grid-column:1 / -1;
+    display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+    padding-bottom:20px;margin-bottom:4px;
+    border-bottom:1px solid var(--linea-soft);
+  }
+  .footer-brand .brand{flex-direction:column;gap:10px;margin-bottom:0}
+  .footer-claim{max-width:26ch}
+  .footer-brand p{max-width:32ch}
+
+  /* le due colonne: testo un filo più piccolo per stare comode a doppia colonna */
+  .footer-col{min-width:0}
+  .footer-col a,.footer-col span{font-size:13.5px}
+
+  /* riga legale + copyright centrati sotto la targa */
+  .footer-legal{justify-content:center;text-align:center}
+  .footer-copy{text-align:center}
+}
