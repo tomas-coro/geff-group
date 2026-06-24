@@ -290,4 +290,42 @@
       applyConsent(c);
     }
   })();
+
+  /* ----------------------------------------------------------------------
+     7) LOGO BUSSOLA — al click l'ago compie un giro e poi va alla home.
+        Il logo è un <a href="index.html">: se navigassimo subito, lo spin
+        non si vedrebbe. Quindi: preveniamo il link, facciamo girare l'ago,
+        poi navighiamo. Se siamo GIÀ nella pagina di destinazione (home),
+        giriamo soltanto, senza ricaricare. Con prefers-reduced-motion non
+        animiamo nulla e lasciamo che il link funzioni in modo normale.
+     ---------------------------------------------------------------------- */
+  var brand = document.querySelector(".site-header .brand");
+  if (brand && !reduceMotion) {
+    var needle = brand.querySelector(".mark .needle");
+    var SPIN_MS = 600;     // durata della keyframe (deve combaciare col CSS)
+    var NAV_MS = 470;      // dopo quanto navigare: si vede quasi tutto il giro
+
+    brand.addEventListener("click", function (e) {
+      if (!needle) return; // niente bussola: lascia fare al link
+      e.preventDefault();
+
+      var href = brand.getAttribute("href");
+      // la destinazione coincide con la pagina attuale? (es. sono già in home)
+      var samePage = new URL(href, location.href).href === location.href;
+
+      // riavvia l'animazione anche su click ravvicinati: togli, forza un
+      // reflow e rimetti la classe, così la keyframe riparte da capo.
+      brand.classList.remove("is-spinning");
+      void brand.offsetWidth;
+      brand.classList.add("is-spinning");
+
+      if (samePage) {
+        // restiamo in pagina: a fine giro togliamo la classe (torna normale)
+        setTimeout(function () { brand.classList.remove("is-spinning"); }, SPIN_MS);
+      } else {
+        // lasciamo vedere il giro, poi navighiamo alla home
+        setTimeout(function () { window.location.href = href; }, NAV_MS);
+      }
+    });
+  }
 })();

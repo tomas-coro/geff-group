@@ -127,8 +127,18 @@ body{padding-top:88px}
 }
 .brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
 .brand .mark{width:30px;height:30px;flex:0 0 auto;color:var(--testo)}
-.brand .mark .needle{transition:transform 1.1s var(--ease)}
+/* la rotazione dell'ago deve ancorarsi al centro della bussola (16,16 del viewBox),
+   non all'angolo 0,0: senza questo l'ago "vola fuori" dal cerchio in hover. */
+.brand .mark .needle{transform-box:view-box;transform-origin:center;transition:transform 1.1s var(--ease)}
 .brand:hover .mark .needle{transform:rotate(135deg)}
+/* click sul logo (gestito in main.js): l'ago compie un giro intero e decelera,
+   come un ago di bussola che si ferma. La classe .is-spinning la mette il JS. */
+.brand.is-spinning .mark .needle{animation:brandNeedleSpin .6s cubic-bezier(.33,.78,.36,1) both}
+@keyframes brandNeedleSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+  .brand:hover .mark .needle{transform:none}
+  .brand.is-spinning .mark .needle{animation:none}
+}
 .brand .name{
   font-family:"Sora",sans-serif;
   font-weight:800;font-size:clamp(15px,2vw,18px);
