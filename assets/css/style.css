@@ -23,6 +23,7 @@
 
   --bordo-r:2px;
   --ease:cubic-bezier(.7,0,.18,1);
+  --spring:cubic-bezier(.2,.9,.25,1.08);  /* ingresso con micro-rimbalzo (modale "Tavola tecnica") */
   --dur:.6s;
 
   --maxw:1180px;
@@ -584,6 +585,72 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 }
 .modal-sub{color:var(--testo-soft);font-size:14.5px;line-height:1.5;margin-bottom:15px}
 
+/* ---- MODALE "TAVOLA TECNICA" (direzione B · La plancia si arma) --------
+   Stesso #modal-contatto e stesso JS: cambia solo struttura + look. L'ingresso
+   è fatto con @keyframes (NON transizioni), così riparte da solo a ogni
+   apertura (display:none -> flex) senza toccare main.js. Tutto scoped sotto
+   .modal-tav per non sporcare il resto del sito. */
+.modal.modal-tav{
+  max-width:880px;width:100%;padding:0;overflow:hidden;
+  animation:none;                      /* l'ingresso lo fanno le due colonne */
+}
+.modal-tav::before{                    /* griglia blueprint di fondo */
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(rgba(79,147,196,.10) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(79,147,196,.10) 1px,transparent 1px);
+  background-size:30px 30px;
+  animation:tav-fade .4s ease .55s both;
+}
+.modal-tav .modal-split{position:relative;z-index:1;display:grid;grid-template-columns:.82fr 1.18fr}
+.modal-tav .modal-close{top:11px;right:13px;z-index:9;background:rgba(10,13,17,.5)}
+
+/* mirini d'angolo + linea di scansione */
+.modal-tav .tk{position:absolute;width:13px;height:13px;border:1.6px solid var(--sartoria-soft);z-index:6;opacity:.7;animation:tav-tk .3s ease .6s both}
+.modal-tav .tk.tl{top:11px;left:11px;border-right:0;border-bottom:0}
+.modal-tav .tk.tr{top:11px;right:11px;border-left:0;border-bottom:0}
+.modal-tav .tk.bl{bottom:11px;left:11px;border-right:0;border-top:0}
+.modal-tav .tk.br{bottom:11px;right:11px;border-left:0;border-top:0}
+.modal-tav .modal-scan{position:absolute;left:0;right:0;top:0;height:2px;z-index:8;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent,var(--sartoria-soft),transparent);
+  animation:tav-scan 1.2s var(--ease) .55s}
+
+/* colonna sinistra: la "plancia" (entra da sinistra) */
+.modal-tav .modal-plancia{position:relative;overflow:hidden;
+  padding:clamp(26px,3vw,38px) clamp(24px,2.6vw,32px);
+  border-right:1px solid var(--linea);background:linear-gradient(165deg,#0c1f2b,var(--carbone-2));
+  animation:tav-left .6s var(--spring) both}
+.modal-tav .modal-draw{display:block;width:84px;height:84px;margin-bottom:4px}
+.modal-tav .modal-draw .ln{fill:none;stroke:var(--sartoria-soft);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;pathLength:1}
+.modal-tav .modal-plancia .modal-eyebrow{margin:0}
+.modal-tav .modal-plancia .modal-title{font-size:clamp(23px,2.6vw,30px);line-height:1.06;margin:14px 0 10px}
+.modal-tav .modal-plancia .modal-sub{max-width:34ch;font-size:14px;margin-bottom:0}
+.modal-tav .modal-recap{margin-top:22px;display:grid;gap:10px}
+.modal-tav .modal-rc{display:flex;align-items:center;gap:13px;padding:13px 14px;
+  border:1px solid var(--linea);border-radius:var(--bordo-r);background:rgba(10,13,17,.4);
+  color:var(--testo-soft);transition:border-color .25s,transform .25s var(--ease)}
+.modal-tav a.modal-rc:hover{border-color:var(--sartoria);transform:translateY(-2px)}
+.modal-tav .modal-rc svg{width:19px;height:19px;flex:0 0 auto;color:var(--testo-faint)}
+.modal-tav .rc-l{font-family:"Sora",sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--testo-faint);display:block;margin-bottom:2px}
+.modal-tav .rc-v{color:var(--testo);font-size:14px;word-break:break-word}
+.modal-tav .modal-tav-tag{font-family:"Sora",sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--testo-faint);margin-top:14px}
+
+/* colonna destra: il form (entra da destra, scrolla se serve) */
+.modal-tav .modal-form-side{padding:clamp(24px,3vw,34px);overflow-y:auto;max-height:calc(100dvh - 40px);
+  animation:tav-right .6s var(--spring) both}
+
+@keyframes tav-left{from{transform:translateX(-101%)}to{transform:none}}
+@keyframes tav-right{from{transform:translateX(101%)}to{transform:none}}
+@keyframes tav-fade{from{opacity:0}to{opacity:.55}}
+@keyframes tav-tk{from{opacity:0}to{opacity:.7}}
+@keyframes tav-scan{0%{opacity:0;top:0}10%{opacity:.95}90%{opacity:.8}100%{opacity:0;top:100%}}
+
+@media(prefers-reduced-motion:reduce){
+  .modal-tav::before,.modal-tav .tk,.modal-tav .modal-plancia,.modal-tav .modal-form-side,.modal-tav .modal-scan{
+    animation:none!important;transform:none!important;
+  }
+  .modal-tav::before{opacity:.55}.modal-tav .tk{opacity:.7}.modal-tav .modal-scan{opacity:0}
+}
+
 /* ---- FORM -------------------------------------------------------------- */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-group{margin-bottom:12px}
@@ -769,6 +836,17 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 @media(min-width:761px){
   .header-actions .btn-cta .lbl-short{display:none}
 }
+
+/* Modale "Tavola tecnica": sotto il breakpoint mobile le due colonne si
+   impilano e l'ingresso diventa verticale (niente slide orizzontale). */
+@media(max-width:760px){
+  .modal.modal-tav{max-width:520px}
+  .modal-tav .modal-split{grid-template-columns:1fr;max-height:calc(100dvh - 24px);overflow-y:auto}
+  .modal-tav .modal-plancia{border-right:none;border-bottom:1px solid var(--linea);animation-name:tav-rise}
+  .modal-tav .modal-form-side{max-height:none;overflow:visible;animation-name:tav-rise}
+  .modal-tav .modal-plancia .modal-sub{max-width:none}
+}
+@keyframes tav-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 @media(max-width:480px){
   /* CONTATTO: compatta la modale così sta in una schermata senza scroll */

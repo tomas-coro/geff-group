@@ -286,27 +286,61 @@
 
 <!-- MODALE FORM DI CONTATTO (Web3Forms — in anteprima finché non c'è la chiave) -->
 <div class="modal-backdrop" id="modal-contatto" role="dialog" aria-modal="true" aria-labelledby="modal-contatto-title">
-  <div class="modal">
+  <div class="modal modal-tav">
+    <span class="modal-scan" aria-hidden="true"></span>
+    <span class="tk tl" aria-hidden="true"></span><span class="tk tr" aria-hidden="true"></span><span class="tk bl" aria-hidden="true"></span><span class="tk br" aria-hidden="true"></span>
     <button class="modal-close" type="button" onclick="closeModal('modal-contatto')" aria-label="Chiudi">&times;</button>
-    <p class="eyebrow modal-eyebrow">Scrivici</p>
-    <h2 class="modal-title" id="modal-contatto-title">Raccontaci cosa cerchi</h2>
-    <p class="modal-sub">Compila il modulo: ti rispondiamo all'indirizzo che ci lasci, di solito entro 24 ore lavorative.</p>
-    <form class="geff-form" id="form-contatto">
-      <input type="hidden" name="access_key" value="REPLACE_WITH_GEFF_WEB3FORMS_KEY">
-      <input type="hidden" name="subject" value="Richiesta dal sito - GEFF Group">
-      <input type="hidden" name="from_name" value="Sito GEFF Group">
-      <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label" for="c-nome">Nome</label><input class="form-input" id="c-nome" name="nome" type="text" required placeholder="Il tuo nome" autocomplete="given-name"></div>
-        <div class="form-group"><label class="form-label" for="c-cognome">Cognome</label><input class="form-input" id="c-cognome" name="cognome" type="text" required placeholder="Il tuo cognome" autocomplete="family-name"></div>
+    <div class="modal-split">
+      <aside class="modal-plancia">
+        <svg class="modal-draw" viewBox="0 0 48 48" aria-hidden="true"><circle class="ln" cx="24" cy="24" r="18"/><path class="ln" d="M24 8 L24 40 M8 24 L40 24"/><path class="ln" d="M24 12 L29 24 L24 36 L19 24 Z"/></svg>
+        <p class="eyebrow modal-eyebrow">Tav. · Contatto</p>
+        <h2 class="modal-title" id="modal-contatto-title">Tracciamo<br>la tua richiesta.</h2>
+        <p class="modal-sub">Mare, sartoria o auto: ti segue chi vende, di persona. Niente intermediari.</p>
+        <div class="modal-recap">
+          <a class="modal-rc" href="mailto:info@geffgroup.it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 6 9-6"/></svg><span><span class="rc-l">Email</span><span class="rc-v">info@geffgroup.it</span></span></a>
+          <a class="modal-rc" href="tel:+393451700315"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L16 13l5 2v3a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><span><span class="rc-l">Telefono</span><span class="rc-v">+39 345 170 0315</span></span></a>
+        </div>
+        <p class="modal-tav-tag">Scala 1:1 · GEFF Group</p>
+      </aside>
+      <div class="modal-form-side">
+        <form class="geff-form" id="form-contatto">
+          <!-- TODO: generare una access key Web3Forms per info@geffgroup.it su web3forms.com — NON riusare quella di relacs (2e9533d4...), altrimenti le mail vanno a relacs -->
+          <input type="hidden" name="access_key" value="REPLACE_WITH_GEFF_WEB3FORMS_KEY">
+          <input type="hidden" name="subject" value="Richiesta dal sito - GEFF Group">
+          <input type="hidden" name="from_name" value="Sito GEFF Group">
+          <!-- honeypot anti-spam: gli umani non lo vedono né lo compilano -->
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="c-nome">Nome</label>
+              <input class="form-input" id="c-nome" name="nome" type="text" required placeholder="Il tuo nome" autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-cognome">Cognome</label>
+              <input class="form-input" id="c-cognome" name="cognome" type="text" required placeholder="Il tuo cognome" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-email">Email</label>
+            <input class="form-input" id="c-email" name="email" type="email" required placeholder="email@esempio.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-tel">Telefono <span class="opt">(opzionale)</span></label>
+            <input class="form-input" id="c-tel" name="telefono" type="tel" placeholder="+39 333 000 0000" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-richiesta">La tua richiesta</label>
+            <textarea class="form-textarea" id="c-richiesta" name="richiesta" required placeholder="Mare, sartoria o auto? Raccontaci cosa cerchi…"></textarea>
+          </div>
+          <label class="form-consent">
+            <input type="checkbox" id="c-consent" name="consenso_privacy" required>
+            <span>Ho letto e accetto la <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> e acconsento al trattamento dei miei dati per essere ricontattato. <span class="req">*</span></span>
+          </label>
+          <button class="form-submit" type="submit">Invia richiesta</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
-      <div class="form-group"><label class="form-label" for="c-email">Email</label><input class="form-input" id="c-email" name="email" type="email" required placeholder="email@esempio.com" autocomplete="email"></div>
-      <div class="form-group"><label class="form-label" for="c-tel">Telefono <span class="opt">(opzionale)</span></label><input class="form-input" id="c-tel" name="telefono" type="tel" placeholder="+39 333 000 0000" autocomplete="tel"></div>
-      <div class="form-group"><label class="form-label" for="c-richiesta">La tua richiesta</label><textarea class="form-textarea" id="c-richiesta" name="richiesta" required placeholder="Mare, sartoria o auto? Raccontaci cosa cerchi…"></textarea></div>
-      <label class="form-consent"><input type="checkbox" id="c-consent" name="consenso_privacy" required><span>Ho letto e accetto la <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> e acconsento al trattamento dei miei dati per essere ricontattato. <span class="req">*</span></span></label>
-      <button class="form-submit" type="submit">Invia richiesta</button>
-      <p class="form-status" role="status" aria-live="polite"></p>
-    </form>
+    </div>
   </div>
 </div>
 

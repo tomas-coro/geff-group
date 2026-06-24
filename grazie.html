@@ -19,7 +19,8 @@
     --carbone:#13171c;--carbone-2:#0e1217;--inchiostro:#0a0d11;
     --testo:#eceef1;--testo-soft:rgba(236,238,241,.62);--testo-faint:rgba(236,238,241,.40);
     --linea:rgba(236,238,241,.14);--sartoria:#2f6f9e;--sartoria-soft:#4f93c4;
-    --bordo-r:2px;
+    --mare:#2f9e86;--mare-soft:#46c0a4;
+    --bordo-r:2px;--ease:cubic-bezier(.7,0,.18,1);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -46,7 +47,29 @@
 
   /* brand/header: ora dall'isola "Plancia" condivisa in style.css (.site-header.is-slim) */
   .card{position:relative;z-index:1;max-width:560px;width:100%;text-align:center}
-  .card-rule{width:1px;height:60px;background:var(--sartoria);margin:0 auto clamp(28px,5vh,44px);opacity:.5}
+
+  /* Cornice "blueprint": griglia + mirini d'angolo + bussola con spunta tracciata */
+  .bp-frame{position:relative;width:120px;height:120px;margin:0 auto clamp(22px,4vh,34px)}
+  .bp-frame .grid{position:absolute;inset:0;opacity:.4;
+    background-image:linear-gradient(rgba(79,147,196,.18) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(79,147,196,.18) 1px,transparent 1px);
+    background-size:20px 20px}
+  .bp-frame .tk{position:absolute;width:12px;height:12px;border:1.5px solid var(--sartoria-soft);opacity:.7}
+  .bp-frame .tk.tl{top:0;left:0;border-right:0;border-bottom:0}
+  .bp-frame .tk.tr{top:0;right:0;border-left:0;border-bottom:0}
+  .bp-frame .tk.bl{bottom:0;left:0;border-right:0;border-top:0}
+  .bp-frame .tk.br{bottom:0;right:0;border-left:0;border-top:0}
+  .bp-frame svg{position:absolute;inset:0;width:100%;height:100%}
+  .bp-frame .ln{fill:none;stroke:var(--sartoria-soft);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1;stroke-dashoffset:1;pathLength:1}
+  .bp-frame .ring{animation:bpDraw .7s var(--ease) .15s forwards}
+  .bp-frame .chk{animation:bpDraw .45s var(--ease) .7s forwards}
+  @keyframes bpDraw{to{stroke-dashoffset:0}}
+  .tech{margin-top:8px;font-family:"Sora",sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--testo-faint);
+    display:inline-flex;align-items:center;gap:10px}
+  .tech .dot{width:6px;height:6px;border-radius:50%;background:var(--mare-soft)}
+  @media(prefers-reduced-motion:reduce){.bp-frame .ln{stroke-dashoffset:0!important;animation:none!important}}
   .label{
     font-family:"Sora",sans-serif;font-size:11px;font-weight:700;
     letter-spacing:.22em;text-transform:uppercase;color:var(--sartoria-soft);
@@ -91,18 +114,24 @@
 </header>
 
 <div class="card">
-  <div class="card-rule" aria-hidden="true"></div>
-  <span class="label">Richiesta ricevuta</span>
-  <h1 class="title">La tua richiesta<br>è in buone mani.</h1>
-  <div class="body">
-    <p>Abbiamo ricevuto il tuo messaggio.<br>Ti rispondiamo all'indirizzo che ci hai lasciato, di solito entro 24 ore lavorative.</p>
-    <p>Per qualcosa di urgente puoi scriverci direttamente a<br>
-    <a href="mailto:info@geffgroup.it">info@geffgroup.it</a> o chiamarci al <a href="tel:+393451700315">+39 345 170 0315</a>.</p>
+  <div class="bp-frame" aria-hidden="true">
+    <span class="grid"></span>
+    <span class="tk tl"></span><span class="tk tr"></span><span class="tk bl"></span><span class="tk br"></span>
+    <svg viewBox="0 0 60 60"><circle class="ln ring" cx="30" cy="30" r="22"/><path class="ln chk" d="M19 31 L27 39 L42 22"/></svg>
   </div>
-  <a href="index.html" class="btn-back">
-    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-    Torna alla home
-  </a>
+  <span class="label">Richiesta registrata</span>
+  <h1 class="title">Tracciata.<br>Ora rispondiamo noi.</h1>
+  <div class="body">
+    <p>Abbiamo ricevuto il tuo messaggio. Ti rispondiamo all'indirizzo che ci hai lasciato, di solito entro 24 ore lavorative.</p>
+    <p>Per qualcosa di urgente: <a href="mailto:info@geffgroup.it">info@geffgroup.it</a> o <a href="tel:+393451700315">+39 345 170 0315</a>.</p>
+  </div>
+  <p class="tech"><span class="dot" aria-hidden="true"></span>Prot. GEFF · presa in carico entro 24 h</p>
+  <div style="margin-top:clamp(26px,5vh,38px)">
+    <a href="index.html" class="btn-back">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Torna alla home
+    </a>
+  </div>
 </div>
 
 <p class="footer-note">© 2026 GEFF GROUP S.R.L.S. · Tutti i diritti riservati</p>
