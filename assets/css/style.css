@@ -35,7 +35,7 @@
 html{
   overflow-x:clip;
   scroll-behavior:smooth;
-  scroll-padding-top:calc(var(--header-h) + 12px);
+  scroll-padding-top:calc(var(--header-h) + 36px);
 }
 body{
   background:var(--inchiostro);
@@ -101,16 +101,28 @@ input:focus-visible,textarea:focus-visible,
 }
 
 /* ---- HEADER ------------------------------------------------------------ */
+/* HEADER — "Plancia": isola tecnica fluttuante (squadrata, mirini agli angoli) */
 .site-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(15,19,24,.86);
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;
+  width:min(var(--maxw),calc(100% - 28px));
+  background:rgba(15,19,24,.82);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--linea);
+  border:1px solid var(--linea);border-radius:var(--bordo-r);
+  box-shadow:0 18px 50px -22px rgba(0,0,0,.75);
 }
+/* mirini agli angoli, come una tavola da disegno */
+.site-header::before,.site-header::after{
+  content:"";position:absolute;width:9px;height:9px;
+  border:1px solid color-mix(in srgb,var(--sartoria) 60%,var(--linea));opacity:.7;
+}
+.site-header::before{top:6px;left:6px;border-right:none;border-bottom:none}
+.site-header::after{bottom:6px;right:6px;border-left:none;border-top:none}
+/* l'header è fuori dal flusso: lascia spazio al contenuto sotto la barra */
+body{padding-top:88px}
 .header-inner{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   min-height:var(--header-h);
-  padding-block:10px;
+  padding-block:10px;padding-inline:18px;
 }
 .brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
 .brand .mark{width:30px;height:30px;flex:0 0 auto;color:var(--testo)}
@@ -204,7 +216,7 @@ input:focus-visible,textarea:focus-visible,
   font-size:clamp(40px,7vw,82px);
   color:var(--testo);margin-bottom:22px;
 }
-.hero-title em{font-style:normal;color:var(--sartoria-soft);display:block}
+.hero-title em{font-style:normal;color:var(--zona-soft,var(--sartoria-soft));display:block}
 .hero-lead{
   font-size:clamp(16px,1.5vw,19px);
   line-height:1.6;color:var(--testo-soft);
@@ -486,9 +498,22 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 
 /* ---- FOOTER ------------------------------------------------------------ */
 .site-footer{
+  position:relative;overflow:hidden;
   border-top:1px solid var(--linea);
   background:var(--inchiostro);
 }
+.site-footer > .container{position:relative;z-index:1}
+/* watermark "GEFF" gigante e tenue dietro al footer — la firma del marchio */
+.footer-watermark{
+  position:absolute;left:0;right:0;bottom:-.06em;z-index:0;
+  display:flex;justify-content:space-between;
+  padding-inline:clamp(10px,3vw,40px);
+  font-family:"Sora",sans-serif;font-weight:800;line-height:.62;
+  font-size:clamp(110px,26vw,380px);
+  color:rgba(236,238,241,.055);
+  pointer-events:none;user-select:none;white-space:nowrap;
+}
+.footer-watermark span{display:block}
 .footer-top{
   display:grid;grid-template-columns:1.4fr 1fr 1fr;
   gap:clamp(28px,4vw,52px);
@@ -704,6 +729,7 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 
 @media(max-width:760px){
   :root{--header-h:60px}
+  body{padding-top:80px}
   /* nav -> menu mobile a tendina */
   .nav{
     position:absolute;top:100%;left:0;right:0;
