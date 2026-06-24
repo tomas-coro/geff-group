@@ -832,6 +832,18 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   .hero-draw{min-height:0}
   .hero-draw svg{max-height:160px}
 }
+/* --- Hero delle pagine SERVIZIO: più compatto della home ----------------- */
+/* In home l'H1 è lo showpiece (fino a 82px) e la bussola riempie la colonna.
+   Sulle pagine servizio (<main data-zona>) l'H1 è solo un'intestazione: lo
+   rimpiccioliamo, riduciamo il padding e impediamo alla tavola di "stirarsi"
+   a tutta la colonna del testo (prima il riquadro arrivava a ~670px quasi
+   vuoto su un disegno di ~280px). Risultato: hero che sta in ~1 schermata. */
+[data-zona] .hero{padding-block:clamp(40px,6vh,68px) clamp(34px,5vh,58px)}
+[data-zona] .hero-eyebrow{margin-bottom:16px}
+[data-zona] .hero-title{font-size:clamp(36px,4.6vw,56px);line-height:1.03;margin-bottom:16px}
+@media(min-width:761px){
+  [data-zona] .hero-draw{align-self:center;min-height:clamp(190px,24vh,250px)}
+}
 
 /* PROCESSO A TAPPE — "come lavoriamo" */
 .steps{display:grid;gap:14px;counter-reset:step}
