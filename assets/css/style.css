@@ -468,6 +468,8 @@ body{padding-top:88px}
 }
 .ethos .container{padding-block:clamp(48px,8vh,88px)}
 .ethos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+/* Home: con 2 punti invece di 3, due colonne piene su desktop (mobile resta 1 colonna) */
+@media(min-width:921px){.ethos-grid.is-duo{grid-template-columns:repeat(2,1fr)}}
 .ethos-claim{
   font-family:"Sora",sans-serif;
   font-weight:800;font-size:clamp(24px,3.4vw,40px);
