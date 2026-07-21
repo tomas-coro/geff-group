@@ -1,0 +1,12 @@
+# Claude workspace
+.claude/
+
+# Documenti sensibili
+Visura*.pdf
+
+# Screenshot temporanei
+Screenshot*.png
+
+# File di build vecchi
+index-bundled.html
+bundle.js
