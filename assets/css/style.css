@@ -853,8 +853,16 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 /* Modale "Tavola tecnica": sotto il breakpoint mobile le due colonne si
    impilano e l'ingresso diventa verticale (niente slide orizzontale). */
 @media(max-width:760px){
-  .modal.modal-tav{max-width:520px}
-  .modal-tav .modal-split{grid-template-columns:1fr;max-height:calc(100dvh - 24px);overflow-y:auto}
+  /* CONTATTO su mobile: la modale è FISSA e occupa tutta la pagina (no card
+     galleggiante, no scroll annidato che dà l'effetto "slidabile"). Un solo
+     contenitore che scrolla: la .modal stessa. */
+  .modal-backdrop{padding:0;align-items:stretch}
+  .modal.modal-tav{
+    max-width:none;width:100%;height:100dvh;max-height:100dvh;
+    border:none;border-radius:0;
+    overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  }
+  .modal-tav .modal-split{grid-template-columns:1fr;max-height:none;overflow:visible;min-height:100%}
   .modal-tav .modal-plancia{border-right:none;border-bottom:1px solid var(--linea);animation-name:tav-rise}
   .modal-tav .modal-form-side{max-height:none;overflow:visible;animation-name:tav-rise}
   .modal-tav .modal-plancia .modal-sub{max-width:none}
@@ -862,8 +870,10 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
 @keyframes tav-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 @media(max-width:480px){
-  /* CONTATTO: compatta la modale così sta in una schermata senza scroll */
-  .modal-backdrop{padding:12px}
+  /* CONTATTO: compatta la modale così sta in una schermata senza scroll.
+     Nota: la modale contatto (.modal-tav) resta fullscreen — vedi blocco 760px.
+     Il padding:0 sul backdrop non riporta la card galleggiante. */
+  .modal-backdrop{padding:0}
   .modal{padding:22px 20px 24px;max-height:calc(100dvh - 24px)}
   .modal-eyebrow{margin-bottom:9px}
   .modal-title{font-size:21px;margin-bottom:5px}
