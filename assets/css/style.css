@@ -861,6 +861,7 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
     max-width:none;width:100%;height:100dvh;max-height:100dvh;
     border:none;border-radius:0;
     overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;         /* niente rimbalzo/"slide" oltre i bordi su iOS */
   }
   .modal-tav .modal-split{grid-template-columns:1fr;max-height:none;overflow:visible;min-height:100%}
   .modal-tav .modal-plancia{border-right:none;border-bottom:1px solid var(--linea);animation-name:tav-rise}
@@ -868,6 +869,27 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
   .modal-tav .modal-plancia .modal-sub{max-width:none}
 }
 @keyframes tav-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+@media(max-width:600px){
+  /* X di chiusura: staccata dalla cornice e ben visibile.
+     Il mirino d'angolo in alto a dx si fondeva con la X -> lo nascondo qui. */
+  .modal-tav .tk.tr{display:none}
+  .modal-tav .modal-close{
+    top:12px;right:12px;width:44px;height:44px;
+    background:rgba(10,13,17,.9);border:1px solid var(--linea);
+    color:var(--testo);border-radius:10px;
+  }
+  /* Plancia compatta: la modale entra (quasi) in una schermata, così si scrolla
+     poco o niente. La mail è già nel form, quindi il recap qui è ridondante. */
+  .modal-tav .modal-plancia{padding:20px 20px 18px}
+  .modal-tav .modal-draw{width:46px;height:46px;margin-bottom:2px}
+  .modal-tav .modal-plancia .modal-title{font-size:24px;margin:8px 0 8px}
+  .modal-tav .modal-plancia .modal-sub{font-size:13px;line-height:1.45;margin-bottom:0}
+  .modal-tav .modal-recap{display:none}
+  .modal-tav .modal-tav-tag{display:none}
+  /* Il form respira meno per far stare tutto in verticale. */
+  .modal-tav .modal-form-side{padding:18px 20px 22px}
+}
 
 @media(max-width:480px){
   /* CONTATTO: compatta la modale così sta in una schermata senza scroll.
