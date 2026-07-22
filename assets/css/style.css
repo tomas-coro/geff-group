@@ -878,15 +878,20 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
     background:rgba(10,13,17,.9);border:1px solid var(--linea);
     color:var(--testo);border-radius:10px;
   }
-  /* Plancia compatta: tiene la card piccola, così resta un pop-up centrato e
-     non un pannello enorme. La mail è già nel form, il recap qui è ridondante. */
-  .modal-tav .modal-plancia{padding:16px 20px 15px}
-  .modal-tav .modal-draw{width:42px;height:42px;margin-bottom:2px}
-  .modal-tav .modal-plancia .modal-title{font-size:22px;margin:6px 0 7px}
-  .modal-tav .modal-plancia .modal-sub{font-size:13px;line-height:1.4;margin-bottom:0}
+  /* Direzione "Griglia serrata": header minimo + campi impacchettati (Nome/
+     Cognome ed Email/Telefono affiancati) così la card resta bassa e si vede
+     tutta senza scroll. Sub, recap ed etichetta scala nascosti su mobile. */
+  .modal-tav .modal-plancia{padding:15px 20px 13px}
+  .modal-tav .modal-draw{width:38px;height:38px;margin-bottom:4px}
+  .modal-tav .modal-plancia .modal-eyebrow{margin-bottom:6px}
+  .modal-tav .modal-plancia .modal-title{font-size:20px;margin:0}
+  .modal-tav .modal-plancia .modal-sub{display:none}
   .modal-tav .modal-recap{display:none}
   .modal-tav .modal-tav-tag{display:none}
-  .modal-tav .modal-form-side{padding:15px 20px 18px}
+  .modal-tav .modal-form-side{padding:14px 20px 16px}
+  .modal-tav .form-textarea{min-height:60px}
+  /* Email più larga del telefono: così il placeholder non si taglia. */
+  .modal-tav .form-row:has(#c-email){grid-template-columns:1.3fr 1fr}
 }
 
 @media(max-width:480px){

@@ -202,6 +202,10 @@
     var banner = document.getElementById("cookie-banner");
     if (!banner) return; // pagina senza banner: niente da fare
 
+    // In anteprima (dentro un iframe, es. la vetrina) non mostrare il banner:
+    // il sito reale aperto da solo continua a mostrarlo normalmente.
+    if (window.self !== window.top) return;
+
     var KEY = "geff_consent";
     var prefs = document.getElementById("cb-prefs");
     var customBtn = banner.querySelector('[data-action="prefs"]');

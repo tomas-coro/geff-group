@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  viewer-template.html · scocca del visualizzatore di direzioni (skill `mockup`)
+  SCOCCA FISSA, CONTENUTO VARIABILE. Cambiati solo <title>/#mockTitle e #panels.
+-->
+<title>Pop-up Contatto mobile · 3 strutture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171e; --ink-2:#1b1f28; --ink-3:#232936;
+    --line:#323a4a; --bone:#e9e4d8; --bone-dim:#a39e93;
+    --brass:#e0a96d; --brass-deep:#b9824a; --ok:#7fb59a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:radial-gradient(1200px 600px at 80% -10%, #1d2230 0, transparent 60%), var(--ink);
+    color:var(--bone); font-family:"Hanken Grotesk",sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:24px 18px 64px}
+
+  header.top{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}
+  .eyebrow{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,2rem);margin:.35rem 0 0;letter-spacing:-.015em}
+  .lead{color:var(--bone-dim);font-size:.9rem;margin:.45rem 0 0;max-width:52ch}
+
+  #chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+  #chips button{
+    font:inherit;font-weight:600;font-size:.84rem;color:var(--bone-dim);
+    background:var(--ink-2);border:1px solid var(--line);border-radius:11px;
+    padding:10px 15px;min-height:44px;cursor:pointer;display:flex;align-items:center;gap:8px;
+    transition:color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  #chips button:hover{color:var(--bone)}
+  #chips button[aria-pressed="true"]{border-color:var(--brass);color:var(--bone);background:var(--ink-3)}
+  #chips button .swatch{width:11px;height:11px;border-radius:4px;background:var(--brass);flex:none}
+
+  #stage{position:relative}
+  .dir-panel[hidden]{display:none}
+  .dir-panel{animation:fade .28s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .dir-card{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .dir-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}
+  .dir-name{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.1rem;line-height:1.15}
+  .dir-mood{font-size:.74rem;color:var(--bone-dim);margin-top:2px}
+  .dir-tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 9px;border-radius:99px;white-space:nowrap;background:var(--ink-3);color:var(--bone-dim);border:1px solid var(--line)}
+  .dir-tag[data-role="Attuale"]{background:rgba(224,169,109,.16);color:var(--brass);border-color:var(--brass-deep)}
+  .dir-tag[data-role="Variante +"]{background:rgba(127,181,154,.14);color:var(--ok);border-color:#3f5a4f}
+  .dir-body{padding:20px 18px}
+  .dir-why{display:flex;gap:9px;align-items:flex-start;padding:13px 18px;border-top:1px solid var(--line);background:rgba(255,255,255,.015);font-size:.82rem;color:var(--bone-dim)}
+  .dir-why b{color:var(--bone);font-weight:600}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Direzioni a confronto</div>
+    <h1 id="mockTitle">Pop-up Contatto mobile — 3 strutture per stare in poco, senza scroll</h1>
+    <p class="lead">Tutte e 3 sono la stessa card blu del sito, mostrata a misura di telefono. Cambia solo <b>come sono organizzati i campi</b> per farci stare tutto senza scrollare. Tocca un nome in alto per cambiare.</p>
+  </header>
+
+  <nav id="chips" role="tablist" aria-label="Direzioni"></nav>
+
+  <main id="stage">
+    <div id="panels">
+
+      <!-- Stili condivisi dei 3 mock (tema sito: scuro nautico, accento blu). -->
+      <style>
+        .mk{--bg:#05080c;--card:#0c141d;--card2:#0f1a24;--line:#233240;--acc:#4f93c4;--acc-d:#3f7aa8;--txt:#e8eef4;--soft:#a9b6c4;--faint:#6f7f8f;}
+        .mk-stage{background:
+            radial-gradient(600px 300px at 70% 0%, rgba(79,147,196,.10), transparent 60%),
+            var(--bg);
+          border:1px solid var(--line);border-radius:14px;padding:26px 14px;
+          display:flex;justify-content:center;}
+        .mk-phone{width:100%;max-width:330px;}
+        .mk-card{position:relative;background:linear-gradient(180deg,var(--card2),var(--card));
+          border:1px solid var(--line);border-radius:16px;padding:18px 16px 16px;
+          box-shadow:0 20px 50px -20px rgba(0,0,0,.7);}
+        .mk-card::before{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;opacity:.5;
+          background-image:linear-gradient(rgba(79,147,196,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(79,147,196,.07) 1px,transparent 1px);
+          background-size:26px 26px;-webkit-mask:linear-gradient(#000,transparent 70%);mask:linear-gradient(#000,transparent 70%);}
+        .mk-card>*{position:relative;z-index:1}
+        .mk-x{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:9px;
+          background:rgba(8,12,17,.9);border:1px solid var(--line);color:var(--txt);
+          font-size:17px;line-height:1;cursor:pointer;display:grid;place-items:center}
+        .mk-x:hover{border-color:var(--acc)}
+        .mk-eyebrow{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+        .mk-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--txt);letter-spacing:-.01em;line-height:1.08;margin:5px 0 0}
+        .mk-comp{width:26px;height:26px;flex:none}
+        .mk-comp .ln{fill:none;stroke:var(--acc);stroke-width:1.5;stroke-linecap:round}
+        .mk-lab{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
+        .mk-lab .opt{color:var(--faint);font-weight:600;letter-spacing:.02em;text-transform:none}
+        .mk-in{height:38px;border:1px solid var(--line);border-radius:9px;background:#070d13;color:var(--faint);
+          font-size:12.5px;display:flex;align-items:center;padding:0 11px}
+        .mk-in.ta{height:auto;min-height:52px;padding:9px 11px;align-items:flex-start;line-height:1.35}
+        .mk-f{margin-bottom:9px}
+        .mk-send{width:100%;min-height:44px;margin-top:2px;border:0;border-radius:9px;cursor:pointer;
+          background:var(--acc);color:#08131c;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:13.5px;
+          transition:transform .12s ease, filter .12s ease}
+        .mk-send:hover{transform:translateY(-1px);filter:brightness(1.06)}
+        .mk-send[data-on="1"]{background:var(--ok)}
+        .mk-consent{display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.35;color:var(--soft);margin:2px 0 10px}
+        .mk-cbox{width:15px;height:15px;flex:none;margin-top:1px;border:1px solid var(--acc-d);border-radius:3px;background:#070d13}
+        .mk-cap{font-size:10px;color:var(--faint);line-height:1.4;margin:9px 2px 0;text-align:center}
+        .mk-cap a{color:var(--soft)}
+        .mk-note{font-size:11px;color:var(--faint);margin:10px 2px 0;text-align:center;font-style:italic}
+      </style>
+
+      <!-- ============ 1 · GRIGLIA SERRATA ============ -->
+      <section class="dir-panel"
+        data-name="Griglia serrata"
+        data-mood="tutto in una card · alla Stripe checkout"
+        data-why="I campi corti stanno affiancati (Nome+Cognome, e-mail piena): tutto entra in una card bassa, si vede in un colpo d'occhio, zero scroll."
+        data-role="">
+        <div class="mk">
+          <div class="mk-stage">
+            <div class="mk-phone">
+              <div class="mk-card">
+                <button class="mk-x" aria-label="Chiudi">&times;</button>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-right:40px">
+                  <svg class="mk-comp" viewBox="0 0 48 48" aria-hidden="true"><circle class="ln" cx="24" cy="24" r="18"/><path class="ln" d="M24 9 L24 39 M9 24 L39 24"/><path class="ln" d="M24 13 L28 24 L24 35 L20 24 Z"/></svg>
+                  <div>
+                    <div class="mk-eyebrow">Contatto · GEFF Group</div>
+                    <div class="mk-title" style="font-size:15.5px;line-height:1.12">Scrivici,<br>ti seguiamo di persona.</div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+                  <div class="mk-f"><span class="mk-lab">Nome</span><div class="mk-in">Il tuo nome</div></div>
+                  <div class="mk-f"><span class="mk-lab">Cognome</span><div class="mk-in">Il tuo cognome</div></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:9px">
+                  <div class="mk-f"><span class="mk-lab">Email</span><div class="mk-in">email@esempio.com</div></div>
+                  <div class="mk-f"><span class="mk-lab">Tel <span class="opt">(opz.)</span></span><div class="mk-in">+39 …</div></div>
+                </div>
+                <div class="mk-f"><span class="mk-lab">La tua richiesta</span><div class="mk-in ta">Mare, sartoria o auto? Raccontaci…</div></div>
+                <label class="mk-consent"><span class="mk-cbox"></span><span>Accetto la <a href="#" style="color:var(--soft)">Privacy Policy</a>. *</span></label>
+                <button class="mk-send" data-save>Invia richiesta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 2 · DUE PASSI ============ -->
+      <section class="dir-panel"
+        data-name="Due passi"
+        data-mood="mini-stepper · alla Typeform"
+        data-why="Divide in 2 schermate cortissime: prima i contatti, poi il messaggio. Ogni passo è minuscolo e sempre tutto visibile; il pop-up resta piccolo."
+        data-role="" hidden>
+        <div class="mk">
+          <div class="mk-stage">
+            <div class="mk-phone">
+              <div class="mk-card" data-step="1">
+                <button class="mk-x" aria-label="Chiudi">&times;</button>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                  <svg class="mk-comp" viewBox="0 0 48 48" aria-hidden="true"><circle class="ln" cx="24" cy="24" r="18"/><path class="ln" d="M24 9 L24 39 M9 24 L39 24"/><path class="ln" d="M24 13 L28 24 L24 35 L20 24 Z"/></svg>
+                  <div class="mk-eyebrow">Contatto · <span class="mk-stepn">passo 1 di 2</span></div>
+                </div>
+                <div style="display:flex;gap:5px;margin:0 0 14px">
+                  <i class="mk-dot" style="flex:1;height:3px;border-radius:2px;background:var(--acc)"></i>
+                  <i class="mk-dot2" style="flex:1;height:3px;border-radius:2px;background:var(--line)"></i>
+                </div>
+
+                <!-- passo 1 -->
+                <div class="st1">
+                  <div class="mk-title" style="font-size:16px;margin-bottom:12px">Come ti richiamiamo?</div>
+                  <div class="mk-f"><span class="mk-lab">Nome e cognome</span><div class="mk-in">Nome Cognome</div></div>
+                  <div class="mk-f"><span class="mk-lab">Email</span><div class="mk-in">email@esempio.com</div></div>
+                  <div class="mk-f"><span class="mk-lab">Telefono <span class="opt">(opzionale)</span></span><div class="mk-in">+39 333 000 0000</div></div>
+                  <button class="mk-send" data-next>Avanti →</button>
+                </div>
+
+                <!-- passo 2 -->
+                <div class="st2" hidden>
+                  <div class="mk-title" style="font-size:16px;margin-bottom:12px">Cosa cerchi?</div>
+                  <div class="mk-f"><span class="mk-lab">La tua richiesta</span><div class="mk-in ta" style="min-height:82px">Mare, sartoria o auto? Raccontaci cosa cerchi…</div></div>
+                  <label class="mk-consent"><span class="mk-cbox"></span><span>Accetto la <a href="#" style="color:var(--soft)">Privacy Policy</a>. *</span></label>
+                  <div style="display:flex;gap:9px">
+                    <button class="mk-send" data-back style="flex:0 0 44px;background:transparent;border:1px solid var(--line);color:var(--soft)">←</button>
+                    <button class="mk-send" data-save style="flex:1">Invia richiesta</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 3 · ESSENZIALE ============ -->
+      <section class="dir-panel"
+        data-name="Essenziale"
+        data-mood="l'osso · alla Basecamp"
+        data-why="Solo 3 campi (nome, email, messaggio) e un invio grande; il consenso è una riga sotto il bottone. La card più piccola possibile, tutto a vista."
+        data-role="" hidden>
+        <div class="mk">
+          <div class="mk-stage">
+            <div class="mk-phone">
+              <div class="mk-card">
+                <button class="mk-x" aria-label="Chiudi">&times;</button>
+                <div class="mk-eyebrow" style="margin-bottom:4px">Contatto · GEFF Group</div>
+                <div class="mk-title" style="font-size:19px;margin-bottom:14px">Scrivici,<br>ti richiamiamo noi.</div>
+                <div class="mk-f"><span class="mk-lab">Nome e cognome</span><div class="mk-in">Nome Cognome</div></div>
+                <div class="mk-f"><span class="mk-lab">Email o telefono</span><div class="mk-in">email@esempio.com</div></div>
+                <div class="mk-f"><span class="mk-lab">Messaggio</span><div class="mk-in ta" style="min-height:64px">Mare, sartoria o auto? Raccontaci…</div></div>
+                <button class="mk-send" data-save>Invia richiesta</button>
+                <p class="mk-cap">Inviando accetti la <a href="#">Privacy Policy</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+// ── Scocca generica: chip auto-costruiti dai pannelli, uno visibile alla volta ──
+(function(){
+  const panelsBox = document.getElementById('panels');
+  const panels = [...panelsBox.querySelectorAll('.dir-panel')];
+  const chips = document.getElementById('chips');
+
+  panels.forEach(p=>{
+    const inner = p.innerHTML;
+    const role = p.dataset.role || '';
+    const tag = role ? `<span class="dir-tag" data-role="${role}">${role}</span>` : `<span class="dir-tag">Direzione</span>`;
+    p.innerHTML = `
+      <div class="dir-card">
+        <div class="dir-head">
+          <div>
+            <div class="dir-name">${p.dataset.name||'Direzione'}</div>
+            <div class="dir-mood">${p.dataset.mood||''}</div>
+          </div>${tag}
+        </div>
+        <div class="dir-body">${inner}</div>
+        ${p.dataset.why ? `<div class="dir-why">✶&nbsp;<span><b>Perché:</b> ${p.dataset.why}</span></div>` : ``}
+      </div>`;
+  });
+
+  function show(i){
+    panels.forEach((p,j)=>p.toggleAttribute('hidden', j!==i));
+    [...chips.children].forEach((c,j)=>c.setAttribute('aria-pressed', j===i));
+  }
+
+  panels.forEach((p,i)=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-pressed', i===0 ? 'true':'false');
+    b.innerHTML = `<span class="swatch"></span>${p.dataset.name || ('Direzione '+(i+1))}`;
+    b.addEventListener('click', ()=>show(i));
+    chips.appendChild(b);
+  });
+
+  show(0);
+
+  // Interazioni finte dei mock (dati finti, niente backend).
+  document.addEventListener('click', e=>{
+    // invio finto
+    const btn = e.target.closest('[data-save]');
+    if(btn){
+      const on = btn.dataset.on === '1';
+      btn.dataset.on = on ? '0':'1';
+      btn.textContent = on ? 'Invia richiesta' : 'Inviato ✓';
+      try{ localStorage.setItem('mockup-contatto-sent', on ? '0':'1'); }catch(_){}
+      return;
+    }
+    // stepper: avanti
+    const nx = e.target.closest('[data-next]');
+    if(nx){
+      const card = nx.closest('.mk-card');
+      card.querySelector('.st1').hidden = true;
+      card.querySelector('.st2').hidden = false;
+      card.querySelector('.mk-dot2').style.background = 'var(--acc)';
+      card.querySelector('.mk-stepn').textContent = 'passo 2 di 2';
+      return;
+    }
+    // stepper: indietro
+    const bk = e.target.closest('[data-back]');
+    if(bk){
+      const card = bk.closest('.mk-card');
+      card.querySelector('.st2').hidden = true;
+      card.querySelector('.st1').hidden = false;
+      card.querySelector('.mk-dot2').style.background = 'var(--line)';
+      card.querySelector('.mk-stepn').textContent = 'passo 1 di 2';
+      return;
+    }
+  });
+})();
+</script>
+</body>
+</html>
