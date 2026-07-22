@@ -879,16 +879,23 @@ a.contact-card:hover svg{color:var(--sartoria-soft)}
     background:rgba(10,13,17,.9);border:1px solid var(--linea);
     color:var(--testo);border-radius:10px;
   }
-  /* Plancia compatta: la modale entra (quasi) in una schermata, così si scrolla
+  /* Plancia compatta: la modale entra in una schermata, così si scrolla
      poco o niente. La mail è già nel form, quindi il recap qui è ridondante. */
-  .modal-tav .modal-plancia{padding:20px 20px 18px}
-  .modal-tav .modal-draw{width:46px;height:46px;margin-bottom:2px}
-  .modal-tav .modal-plancia .modal-title{font-size:24px;margin:8px 0 8px}
-  .modal-tav .modal-plancia .modal-sub{font-size:13px;line-height:1.45;margin-bottom:0}
+  .modal-tav .modal-plancia{flex:0 0 auto;padding:16px 20px 15px}
+  .modal-tav .modal-draw{width:42px;height:42px;margin-bottom:2px}
+  .modal-tav .modal-plancia .modal-title{font-size:22px;margin:6px 0 7px}
+  .modal-tav .modal-plancia .modal-sub{font-size:13px;line-height:1.4;margin-bottom:0}
   .modal-tav .modal-recap{display:none}
   .modal-tav .modal-tav-tag{display:none}
-  /* Il form respira meno per far stare tutto in verticale. */
-  .modal-tav .modal-form-side{padding:18px 20px 22px}
+
+  /* Sfrutta TUTTA l'altezza: la colonna si stira e il campo "richiesta" cresce
+     per riempire lo spazio libero (ogni pixel usato). Sui telefoni piccoli si
+     stringe fino al minimo senza tagliare il bottone Invia. */
+  .modal-tav .modal-split{display:flex;flex-direction:column;min-height:100%}
+  .modal-tav .modal-form-side{flex:1;display:flex;flex-direction:column;padding:15px 20px 18px}
+  .modal-tav .geff-form{flex:1;display:flex;flex-direction:column}
+  .modal-tav .form-group:has(.form-textarea){flex:1;display:flex;flex-direction:column;min-height:88px}
+  .modal-tav .form-textarea{flex:1;min-height:0;resize:none}
 }
 
 @media(max-width:480px){
