@@ -1,6 +1,14 @@
 # Claude workspace
 .claude/
 
+# macOS
+.DS_Store
+
+# Dominio: NON committare mai. geffgroup.it è il sito LIVE dello zio;
+# committare questo CNAME lo farebbe reclamare dal sito provvisorio.
+# Va aggiunto solo come ULTIMO passo del lancio, di proposito.
+CNAME
+
 # Documenti sensibili
 Visura*.pdf
 
@@ -10,3 +18,6 @@ Screenshot*.png
 # File di build vecchi
 index-bundled.html
 bundle.js
+
+# Artefatti Playwright/MCP (screenshot, snapshot di debug)
+.playwright-mcp/

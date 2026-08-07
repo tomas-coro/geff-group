@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0d11">
+<meta name="robots" content="noindex,nofollow">
+<title>Pagina non trovata - GEFF Group</title>
+<meta name="description" content="La pagina che cercavi non esiste o è stata spostata. Torna alla home di GEFF Group, Udine.">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* Pagina 404: stessi token e impianto calmo della pagina "grazie" */
+  :root{
+    --carbone:#13171c;--carbone-2:#0e1217;--inchiostro:#0a0d11;
+    --testo:#eceef1;--testo-soft:rgba(236,238,241,.62);--testo-faint:rgba(236,238,241,.40);
+    --linea:rgba(236,238,241,.14);--sartoria:#2f6f9e;--sartoria-soft:#4f93c4;
+    --mare:#2f9e86;--mare-soft:#46c0a4;
+    --bordo-r:2px;--ease:cubic-bezier(.7,0,.18,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--inchiostro);color:var(--testo-soft);
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:100dvh;padding:clamp(32px,8vw,80px) clamp(20px,6vw,60px);
+    position:relative;overflow:hidden;-webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(50% 50% at 20% 110%, rgba(47,158,134,.16), transparent 60%),
+      radial-gradient(50% 50% at 50% 120%, rgba(47,111,158,.13), transparent 60%),
+      radial-gradient(50% 50% at 82% 110%, rgba(140,131,119,.15), transparent 60%);
+  }
+  a{color:inherit;text-decoration:none}
+
+  .card{position:relative;z-index:1;max-width:560px;width:100%;text-align:center}
+
+  /* Cornice blueprint con bussola "fuori rotta": aghi che non trovano il nord */
+  .bp-frame{position:relative;width:120px;height:120px;margin:0 auto clamp(22px,4vh,34px)}
+  .bp-frame .grid{position:absolute;inset:0;opacity:.4;
+    background-image:linear-gradient(rgba(79,147,196,.18) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(79,147,196,.18) 1px,transparent 1px);
+    background-size:20px 20px}
+  .bp-frame .tk{position:absolute;width:12px;height:12px;border:1.5px solid var(--sartoria-soft);opacity:.7}
+  .bp-frame .tk.tl{top:0;left:0;border-right:0;border-bottom:0}
+  .bp-frame .tk.tr{top:0;right:0;border-left:0;border-bottom:0}
+  .bp-frame .tk.bl{bottom:0;left:0;border-right:0;border-top:0}
+  .bp-frame .tk.br{bottom:0;right:0;border-left:0;border-top:0}
+  .bp-frame svg{position:absolute;inset:0;width:100%;height:100%}
+  .bp-frame .ln{fill:none;stroke:var(--sartoria-soft);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1;stroke-dashoffset:1;pathLength:1}
+  .bp-frame .ring{animation:bpDraw .7s var(--ease) .15s forwards}
+  .bp-frame .needle{transform-origin:30px 30px;animation:bpSpin 6s linear .8s infinite}
+  @keyframes bpDraw{to{stroke-dashoffset:0}}
+  @keyframes bpSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){
+    .bp-frame .ln{stroke-dashoffset:0!important;animation:none!important}
+    .bp-frame .needle{animation:none!important}
+  }
+  .label{
+    font-family:"Sora",sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--sartoria-soft);
+    display:block;margin-bottom:clamp(16px,3vh,24px);
+  }
+  .title{
+    font-family:"Sora",sans-serif;font-weight:800;
+    font-size:clamp(30px,5vw,50px);color:var(--testo);
+    letter-spacing:-.01em;line-height:1.05;margin-bottom:clamp(20px,4vh,30px);
+  }
+  .body{font-size:clamp(14px,1.4vw,16px);line-height:1.75;color:var(--testo-soft);margin-bottom:clamp(28px,5vh,40px)}
+  .body p+p{margin-top:1em}
+  .body a{color:var(--sartoria-soft);text-decoration:underline;text-underline-offset:2px}
+  .body a:hover{color:var(--testo)}
+  .btn-back{
+    display:inline-flex;align-items:center;gap:9px;min-height:44px;
+    font-family:"Sora",sans-serif;font-weight:700;font-size:14px;
+    letter-spacing:.02em;color:var(--testo-soft);
+    border:1px solid var(--linea);border-radius:var(--bordo-r);padding:13px 26px;
+    transition:color .2s,border-color .2s;
+  }
+  .btn-back:hover{color:var(--testo);border-color:var(--sartoria)}
+  .tech{margin-top:8px;font-family:"Sora",sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--testo-faint);
+    display:inline-flex;align-items:center;gap:10px}
+  .tech .dot{width:6px;height:6px;border-radius:50%;background:var(--mare-soft)}
+  .footer-note{
+    position:fixed;bottom:clamp(16px,3vh,28px);left:0;right:0;text-align:center;
+    font-size:11px;letter-spacing:.04em;color:var(--testo-faint);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER - isola "Plancia" ridotta (brand + torna al sito), zero JS -->
+<header class="site-header is-slim">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="GEFF Group - Home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><g class="needle"><path d="M16 5 L20 16 L16 27 L12 16 Z" fill="currentColor" stroke="none"/></g><circle cx="16" cy="16" r="1.6" fill="#0f1318" stroke="none"/></svg>
+      </span>
+      <span class="name">GEFF <span>GROUP</span></span>
+    </a>
+    <a class="nav-back" href="index.html">Torna al sito</a>
+  </div>
+</header>
+
+<div class="card">
+  <div class="bp-frame" aria-hidden="true">
+    <span class="grid"></span>
+    <span class="tk tl"></span><span class="tk tr"></span><span class="tk bl"></span><span class="tk br"></span>
+    <svg viewBox="0 0 60 60">
+      <circle class="ln ring" cx="30" cy="30" r="22"/>
+      <g class="needle"><path class="ln" d="M30 12 L36 30 L30 48 L24 30 Z"/></g>
+    </svg>
+  </div>
+  <span class="label">Errore 404 · rotta non trovata</span>
+  <h1 class="title">Qui non c'è<br>nessun approdo.</h1>
+  <div class="body">
+    <p>La pagina che cercavi non esiste, ha cambiato indirizzo o non è mai esistita. Capita: riportiamo la bussola sul nord.</p>
+    <p>Se pensi sia un errore nostro, scrivici a <a href="mailto:info@geffgroup.it">info@geffgroup.it</a>.</p>
+  </div>
+  <p class="tech"><span class="dot" aria-hidden="true"></span>Prot. GEFF · pagina 404</p>
+  <div style="margin-top:clamp(26px,5vh,38px)">
+    <a href="index.html" class="btn-back">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Torna alla home
+    </a>
+  </div>
+</div>
+
+<p class="footer-note">© 2026 GEFF GROUP S.R.L.S. · Tutti i diritti riservati</p>
+
+<!-- ===== COOKIE BANNER ===== -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-labelledby="cb-title" aria-describedby="cb-desc">
+  <button class="cb-close" type="button" data-consent="deny" aria-label="Chiudi e rifiuta i cookie non necessari">&times;</button>
+  <div class="cb-inner">
+    <div class="cb-text">
+      <strong id="cb-title">Informativa cookie</strong>
+      <p id="cb-desc">Usiamo solo cookie tecnici necessari al funzionamento del sito. Eventuali statistiche anonime verranno attivate solo con il tuo consenso. <a href="cookie-policy.html">Maggiori informazioni</a></p>
+    </div>
+    <div class="cb-actions">
+      <button class="cb-btn cb-deny" type="button" data-consent="deny">Rifiuta</button>
+      <button class="cb-btn cb-custom" type="button" data-action="prefs" aria-expanded="false" aria-controls="cb-prefs">Personalizza</button>
+      <button class="cb-btn cb-accept" type="button" data-consent="accept">Accetta tutti</button>
+    </div>
+  </div>
+
+  <div class="cb-prefs" id="cb-prefs" hidden>
+    <div class="cb-pref-row">
+      <div class="cb-pref-info">
+        <strong>Cookie necessari</strong>
+        <p>Indispensabili per il funzionamento del sito e per ricordare le tue scelte. Sempre attivi.</p>
+      </div>
+      <label class="cb-switch">
+        <input type="checkbox" checked disabled aria-label="Cookie necessari (sempre attivi)">
+        <span class="cb-slider"></span>
+      </label>
+    </div>
+    <div class="cb-pref-row">
+      <div class="cb-pref-info">
+        <strong>Statistiche anonime</strong>
+        <p>Misurazione aggregata e anonima delle visite, senza profilazione. Al momento non è collegato alcuno strumento: questa scelta vale per quando lo sarà.</p>
+      </div>
+      <label class="cb-switch">
+        <input type="checkbox" id="cb-analytics" aria-label="Statistiche anonime">
+        <span class="cb-slider"></span>
+      </label>
+    </div>
+    <div class="cb-prefs-actions">
+      <button class="cb-btn cb-deny" type="button" data-consent="deny">Rifiuta tutti</button>
+      <button class="cb-btn cb-accept" type="button" data-action="save">Salva preferenze</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
